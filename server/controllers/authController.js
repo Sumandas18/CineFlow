@@ -64,8 +64,8 @@ class AuthController {
 
             const cookieOptions = {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax'
+                secure: true,
+                sameSite: 'none'
             };
             
             if (remember) {
@@ -89,7 +89,9 @@ class AuthController {
     static async logout(req, res) {
         res.cookie('token', 'none', {
             expires: new Date(Date.now() + 10 * 1000),
-            httpOnly: true
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
         });
         res.status(200).json({ success: true, message: 'Logged out successfully' });
     }
