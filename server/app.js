@@ -1,6 +1,10 @@
 require('dotenv').config();
 require('./utils/envChecker')(); // Auto-validate env variables on startup
 
+// Fix for Render IPv6 ENETUNREACH error for Nodemailer
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
