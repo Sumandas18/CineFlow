@@ -197,7 +197,7 @@ class AIController {
             try {
                 // @todo: move genAI initialization outside the function for better performance
                 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY.trim());
-                const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
                 
                 let prompt = `You are an expert social media manager. Analyze this attached media (${resourceType}) visually and return a JSON object ONLY. 
                 The JSON must contain:

@@ -2,33 +2,27 @@ const paymentService = require('../services/paymentService');
 const Payment = require('../models/Payment');
 const User = require('../models/User');
 const emailService = require('../services/emailService');
+const Plan = require('../models/Plan');
 
 class PaymentController {
     static async createOrder(req, res, next) {
         try {
             const { plan } = req.body;
-            let amount;
-            let planName;
+            let planName = plan;
+            if (plan === '3 Months') planName = 'Starter';
+            else if (plan === '6 Months') planName = 'Creator Pro';
+            else if (plan === '12 Months') planName = 'Unlimited Pro+';
 
-            switch (plan) {
-                case '3 Months':
-                case 'Starter':
-                    amount = 199;
-                    planName = 'Starter';
-                    break;
-                case '6 Months':
-                case 'Creator Pro':
-                    amount = 499;
-                    planName = 'Creator Pro';
-                    break;
-                case '12 Months':
-                case 'Unlimited Pro+':
-                    amount = 899;
-                    planName = 'Unlimited Pro+';
-                    break;
-                default:
-                    return res.status(400).json({ message: 'Invalid plan selected' });
+            let planDoc = await Plan.findOne({ name: planName });
+            if (!planDoc) {
+                // Fallbacks if DB is empty during test
+                if (planName === 'Starter') planDoc = { price: 199 };
+                else if (planName === 'Creator Pro') planDoc = { price: 499 };
+                else if (planName === 'Unlimited Pro+') planDoc = { price: 899 };
+                else return res.status(400).json({ message: 'Invalid plan selected' });
             }
+
+            const amount = planDoc.price;
 
             // Calculate GST
             const gstAmount = Math.round(amount * 0.18);

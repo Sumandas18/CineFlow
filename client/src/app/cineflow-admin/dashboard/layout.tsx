@@ -15,6 +15,7 @@ import {
   Sparkles
 } from "lucide-react";
 import api from "@/lib/api";
+import MeshGradientBackground from "@/components/ui/MeshGradientBackground";
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -55,12 +56,12 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   };
 
   const navItems = [
-    { name: "Dashboard", href: "/cineflow-admin/dashboard", icon: LayoutDashboard },
-    { name: "User Analytics", href: "#", icon: Users },
-    { name: "Creator Tools", href: "#", icon: ShieldAlert },
-    { name: "Subscription Plans", href: "#", icon: CreditCard },
-    { name: "System Health", href: "#", icon: Activity },
-    { name: "Settings", href: "#", icon: Settings },
+    { name: "Dashboard", href: "/cineflow-admin/dashboard", id: "dashboard", icon: LayoutDashboard },
+    { name: "User Analytics", href: "/cineflow-admin/dashboard?tab=analytics", id: "analytics", icon: Users },
+    { name: "Creator Tools", href: "/cineflow-admin/dashboard?tab=tools", id: "tools", icon: ShieldAlert },
+    { name: "Subscription Plans", href: "/cineflow-admin/dashboard?tab=plans", id: "plans", icon: CreditCard },
+    { name: "System Health", href: "/cineflow-admin/dashboard?tab=health", id: "health", icon: Activity },
+    { name: "Settings", href: "/cineflow-admin/dashboard?tab=settings", id: "settings", icon: Settings },
   ];
 
   if (loading) {
@@ -68,37 +69,38 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white flex font-sans overflow-hidden">
+    <div className="min-h-screen bg-[#020617] text-white flex font-sans overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/5 bg-[#121212] flex flex-col justify-between relative z-20">
+      <aside className="w-64 border-r border-blue-900/40 bg-[#040f26]/60 backdrop-blur-xl flex flex-col justify-between relative z-20">
         <div>
           {/* Logo */}
-          <div className="h-20 flex items-center px-8 border-b border-white/5 gap-2">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/20">
+          <div className="h-20 flex items-center px-8 border-b border-blue-900/40 gap-2">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/20">
               <Sparkles size={20} />
             </div>
-            <h1 className="text-xl font-black tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">CINE<span className="text-white">FLOW</span></h1>
+            <h1 className="text-xl font-black tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center gap-1">CINE<span className="text-white">FLOW</span> <span className="text-[9px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded-md border border-blue-500/30">ADMIN</span></h1>
           </div>
 
           {/* Navigation */}
           <nav className="p-4 space-y-1">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isDashboard = item.id === 'dashboard' && pathname === '/cineflow-admin/dashboard' && typeof window !== 'undefined' && !window.location.search.includes('tab=');
+              const isActive = isDashboard || (typeof window !== 'undefined' && window.location.search.includes(`tab=${item.id}`));
               const Icon = item.icon;
               return (
                 <a 
                   key={item.name} 
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all relative ${
                     isActive 
-                      ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' 
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      ? 'bg-blue-500/10 text-cyan-400 border border-blue-500/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]' 
+                      : 'text-slate-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <Icon size={18} className={`transition-transform duration-300 ${isActive ? "text-pink-400 scale-110" : "group-hover:scale-110 group-hover:text-pink-300"}`} />
+                  <Icon size={18} className={`transition-transform duration-300 ${isActive ? "text-cyan-400 scale-110" : "group-hover:scale-110 group-hover:text-cyan-300"}`} />
                   {item.name}
                   {isActive && (
-                    <motion.div layoutId="activeNav" className="absolute left-0 w-1 h-8 bg-purple-500 rounded-r-full" />
+                    <motion.div layoutId="activeNav" className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-cyan-400 rounded-r-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
                   )}
                 </a>
               );
@@ -107,14 +109,14 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
         </div>
 
         {/* Profile Card */}
-        <div className="p-4 border-t border-white/5">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 relative group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center font-bold text-sm border-2 border-[#121212] shadow-lg">
+        <div className="p-4 border-t border-blue-900/40">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-[#0a1b38]/50 border border-blue-800/30 relative group">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center font-bold text-sm border-2 border-slate-900 shadow-lg text-white">
               {admin?.name?.substring(0, 2).toUpperCase() || 'NA'}
             </div>
             <div className="flex-1 overflow-hidden">
-              <h3 className="text-sm font-bold truncate">{admin?.name || 'Nexus Admin'}</h3>
-              <p className="text-[10px] text-green-400 uppercase tracking-widest truncate">Super Admin Access</p>
+              <h3 className="text-sm font-bold truncate text-slate-200">{admin?.name || 'Nexus Admin'}</h3>
+              <p className="text-[10px] text-cyan-400 uppercase tracking-widest truncate">Super Admin Access</p>
             </div>
             
             {/* Logout Button on Hover */}
@@ -126,58 +128,38 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
               <LogOut size={14} />
             </button>
           </div>
-          <div className="text-center mt-3 text-[9px] text-gray-600 font-mono">v2.4.0</div>
+          <div className="text-center mt-3 text-[9px] text-slate-500 font-mono">v2.5.0</div>
         </div>
       </aside>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
         {/* Animated Background Gradient/Grid */}
-        <div className="absolute inset-0 bg-[#0a0510] pointer-events-none">
-           {/* Moving Grid Background */}
-           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-           {/* Animated Glowing Orbs */}
-           <motion.div 
-             animate={{ 
-               scale: [1, 1.2, 1],
-               opacity: [0.3, 0.5, 0.3],
-             }}
-             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-             className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" 
-           />
-           <motion.div 
-             animate={{ 
-               scale: [1, 1.5, 1],
-               opacity: [0.2, 0.4, 0.2],
-             }}
-             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-             className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-pink-600/10 rounded-full blur-[150px]" 
-           />
-        </div>
+        <MeshGradientBackground />
 
         {/* Header */}
-        <header className="h-20 border-b border-white/5 bg-[#121212]/50 backdrop-blur-md flex items-center justify-between px-8 relative z-10">
+        <header className="h-20 border-b border-blue-900/40 bg-[#040f26]/40 backdrop-blur-md flex items-center justify-between px-8 relative z-10">
           <div className="flex items-center gap-4">
-            <button className="text-gray-400 hover:text-white transition-colors hover:scale-110 duration-200">
+            <button className="text-slate-400 hover:text-white transition-colors hover:scale-110 duration-200">
               <Menu size={20} />
             </button>
-            <h2 className="text-lg font-bold text-gray-200">CineFlow Dashboard</h2>
+            <h2 className="text-lg font-bold text-slate-200">CineFlow Admin</h2>
           </div>
 
           <div className="flex items-center gap-6">
-            <button className="relative text-gray-400 hover:text-white transition-colors">
+            <button className="relative text-slate-400 hover:text-white transition-colors">
               <Bell size={20} />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-pink-500 rounded-full border border-[#121212]"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-cyan-500 rounded-full border border-slate-900"></span>
             </button>
-            <div className="flex items-center gap-3 pl-6 border-l border-white/10">
+            <div className="flex items-center gap-3 pl-6 border-l border-blue-900/40">
               <div className="text-right hidden sm:block">
                 <div className="text-xs font-bold text-white">Admin Core</div>
-                <div className="text-[10px] text-green-400 flex items-center justify-end gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                <div className="text-[10px] text-emerald-400 flex items-center justify-end gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                   Active Node
                 </div>
               </div>
-              <div className="w-8 h-8 rounded-lg bg-pink-500/20 border border-pink-500/50 flex items-center justify-center text-pink-400 font-bold text-xs">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-cyan-400 font-bold text-xs">
                 AC
               </div>
             </div>

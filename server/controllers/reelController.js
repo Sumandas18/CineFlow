@@ -77,7 +77,7 @@ class ReelController {
                 return res.status(200).json({ success: true, aiMetadata: reel.aiMetadata });
             }
 
-            const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+            const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
             
             const prompt = `You are a social media viral expert. I have generated a cinematic video reel.
 Music Category / Name: ${reel.musicTitle || (reel.music ? reel.music.title : 'Cinematic Soundtrack')}

@@ -22,6 +22,8 @@ const adminRoutes = require('./routes/adminRoutes');
 const musicRoutes = require('./routes/musicRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const renderRoutes = require('./routes/renderRoutes');
+const planRoutes = require('./routes/planRoutes');
+const maintenanceMiddleware = require('./middleware/maintenanceMiddleware');
 
 const app = express();
 
@@ -57,6 +59,7 @@ const path = require('path');
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Mount Routes
+app.use(maintenanceMiddleware);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ai', aiRoutes);
@@ -67,6 +70,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/music', musicRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/render', renderRoutes);
+app.use('/api/plans', planRoutes);
 
 // Root Route
 app.get('/', (req, res) => {

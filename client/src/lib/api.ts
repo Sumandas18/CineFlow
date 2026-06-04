@@ -22,6 +22,14 @@ api.interceptors.response.use(
         window.location.href = "/login";
       }
     }
+    
+    // Check if error is 503 Service Unavailable (Maintenance Mode)
+    if (error.response?.status === 503 && typeof window !== "undefined") {
+      if (!window.location.pathname.includes('/maintenance') && !window.location.pathname.includes('/cineflow-admin')) {
+        window.location.href = "/maintenance";
+      }
+    }
+
     return Promise.reject(error);
   }
 );

@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Payment = require('../models/Payment');
 const DeletedUserLog = require('../models/DeletedUserLog');
 const Reel = require('../models/Reel');
+const Setting = require('../models/Setting');
 const emailService = require('../services/emailService');
 const smsService = require('../services/smsService');
 const jwt = require('jsonwebtoken');
@@ -380,6 +381,37 @@ class AdminController {
                 success: true,
                 message: `Renewal reminder email sent successfully to ${user.email}!`
             });
+        } catch (error) {
+            next(error);
+        }
+    }
+    // 9. Get Platform Settings
+    static async getSettings(req, res, next) {
+        try {
+            let settings = await Setting.findOne();
+            if (!settings) {
+                settings = await Setting.create({});
+            }
+            res.status(200).json({ success: true, settings });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 10. Update Platform Settings
+    static async updateSettings(req, res, next) {
+        try {
+            const { maintenanceMode, autoDeleteFailed, platformName, supportEmail } = req.body;
+            let settings = await Setting.findOne();
+            if (!settings) settings = new Setting();
+
+            if (maintenanceMode !== undefined) settings.maintenanceMode = maintenanceMode;
+            if (autoDeleteFailed !== undefined) settings.autoDeleteFailed = autoDeleteFailed;
+            if (platformName !== undefined) settings.platformName = platformName;
+            if (supportEmail !== undefined) settings.supportEmail = supportEmail;
+
+            await settings.save();
+            res.status(200).json({ success: true, settings });
         } catch (error) {
             next(error);
         }

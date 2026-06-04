@@ -15,7 +15,7 @@ export default function AnalyticsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reelsRes = await api.get('/reel');
+        const reelsRes = await api.get('/reels');
         if (reelsRes.data.success) {
           // Map to attach prediction state
           const fetchedReels = reelsRes.data.reels.map((r: any) => ({
@@ -35,11 +35,13 @@ export default function AnalyticsPage() {
   }, []);
 
   const generateReelChartData = (reelId: string) => {
-    const seed = reelId.charCodeAt(0) + reelId.charCodeAt(reelId.length - 1);
+    // Generate a unique seed based on the entire reelId to ensure different stats for every image
+    const seed = parseInt(reelId.slice(-6), 16) || Math.floor(Math.random() * 100000);
     const chartData = [];
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const today = new Date();
-    const baseViews = (seed * 100) + 5000; 
+    // Use modulo to keep base views between 2000 and 120000
+    const baseViews = (seed % 118000) + 2000; 
     
     for (let i = 6; i >= 0; i--) {
       const d = new Date(today);
@@ -86,7 +88,7 @@ export default function AnalyticsPage() {
     // Fetch AI Metadata if missing
     if (!currentReel.aiMetadata || !currentReel.aiMetadata.captions || currentReel.aiMetadata.captions.length === 0) {
       try {
-        const metaRes = await api.get(`/reel/${reelId}/metadata`);
+        const metaRes = await api.post(`/reels/${reelId}/ai-metadata`);
         if (metaRes.data.success) {
           currentReel.aiMetadata = metaRes.data.aiMetadata;
         }
@@ -131,9 +133,21 @@ export default function AnalyticsPage() {
               <div className="p-6 flex flex-col md:flex-row items-center gap-6">
                 
                 {/* Media Preview */}
-                <div className="w-full md:w-48 h-32 rounded-2xl bg-black/50 overflow-hidden shrink-0 relative border border-white/10 shadow-inner group">
+                <div className="w-full md:w-48 h-32 rounded-2xl bg-black/50 overflow-hidden shrink-0 relative border border-white/10 shadow-inner group flex items-center justify-center">
                   {reel.sourceImage ? (
-                    <img src={reel.sourceImage} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Reel media" />
+                    reel.sourceImage.match(/\.(mp4|webm|ogg|mov)$/i) ? (
+                      <video 
+                        src={reel.sourceImage} 
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" 
+                        muted loop playsInline autoPlay 
+                      />
+                    ) : (
+                      <img 
+                        src={reel.sourceImage} 
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" 
+                        alt="Reel media" 
+                      />
+                    )
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <PlayCircle size={32} className="text-gray-500" />

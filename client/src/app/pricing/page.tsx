@@ -11,6 +11,23 @@ export default function PricingPage() {
   const [paymentMethod, setPaymentMethod] = useState('upi');
   const [successModal, setSuccessModal] = useState(false);
   const [errorToast, setErrorToast] = useState<string | null>(null);
+  const [prices, setPrices] = useState<Record<string, number>>({
+    'Starter': 199,
+    'Creator Pro': 499,
+    'Unlimited Pro+': 899
+  });
+
+  React.useEffect(() => {
+    api.get('/plans').then(res => {
+      if (res.data.success && res.data.plans) {
+        const newPrices: Record<string, number> = {};
+        res.data.plans.forEach((p: any) => {
+          newPrices[p.name] = p.price;
+        });
+        setPrices(prev => ({ ...prev, ...newPrices }));
+      }
+    }).catch(console.error);
+  }, []);
 
   const handleSelectPlan = (planName: string, price: number) => {
     setCheckoutPlan({ name: planName, price });
@@ -30,6 +47,9 @@ export default function PricingPage() {
         description: `Subscription to ${planName}`,
         order_id: id,
         handler: async function (response: any) {
+          // Immediately hide the checkout modal as soon as Razorpay closes
+          setCheckoutPlan(null);
+          
           try {
             await api.post('/payment/verify', {
               razorpay_order_id: response.razorpay_order_id,
@@ -72,7 +92,7 @@ export default function PricingPage() {
 
       {/* Success Modal */}
       {successModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 backdrop-blur-md">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-zinc-900 border border-purple-500/30 p-8 rounded-3xl shadow-[0_0_50px_rgba(168,85,247,0.2)] max-w-sm w-full mx-4 text-center">
             <div className="w-20 h-20 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 size={40} />
@@ -108,7 +128,7 @@ export default function PricingPage() {
             <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
             <p className="text-sm text-gray-400 mb-6 h-10">Essential AI tools to start your viral journey.</p>
             <div className="mb-8">
-              <span className="text-6xl font-black text-white">₹199</span>
+              <span className="text-6xl font-black text-white">₹{prices['Starter']}</span>
               <span className="text-sm text-gray-500 font-medium">/3 Months</span>
             </div>
             <ul className="space-y-4 mb-8 text-sm text-gray-300 flex-1">
@@ -117,7 +137,7 @@ export default function PricingPage() {
               <FeatureItem>Trending Hashtags</FeatureItem>
               <FeatureItem>Best Time to Post</FeatureItem>
             </ul>
-            <CheckoutButton onClick={() => handleSelectPlan('Starter', 199)} loading={loadingPlan === 'Starter'} label="Select Plan" />
+            <CheckoutButton onClick={() => handleSelectPlan('Starter', prices['Starter'])} loading={loadingPlan === 'Starter'} label="Select Plan" />
           </div>
         </HoverCard>
 
@@ -130,7 +150,7 @@ export default function PricingPage() {
             <h3 className="text-2xl font-bold text-white mb-2">Creator Pro</h3>
             <p className="text-sm text-gray-400 mb-6 h-10">Enhanced media support for serious creators.</p>
             <div className="mb-8">
-              <span className="text-6xl font-black text-white">₹499</span>
+              <span className="text-6xl font-black text-white">₹{prices['Creator Pro']}</span>
               <span className="text-sm text-gray-500 font-medium">/6 Months</span>
             </div>
             <ul className="space-y-4 mb-8 text-sm text-gray-300 flex-1">
@@ -139,7 +159,7 @@ export default function PricingPage() {
               <FeatureItem>Trending Hashtags</FeatureItem>
               <FeatureItem>Best Time to Post</FeatureItem>
             </ul>
-            <CheckoutButton onClick={() => handleSelectPlan('Creator Pro', 499)} loading={loadingPlan === 'Creator Pro'} label="Select Plan" />
+            <CheckoutButton onClick={() => handleSelectPlan('Creator Pro', prices['Creator Pro'])} loading={loadingPlan === 'Creator Pro'} label="Select Plan" />
           </div>
         </HoverCard>
 
@@ -158,7 +178,7 @@ export default function PricingPage() {
               <h3 className="text-2xl font-bold text-white mb-2 mt-2">Unlimited Pro+</h3>
               <p className="text-sm text-purple-200/70 mb-6 h-10">The ultimate viral machine with all premium features.</p>
               <div className="mb-8">
-                <span className="text-6xl font-black text-white">₹899</span>
+                <span className="text-6xl font-black text-white">₹{prices['Unlimited Pro+']}</span>
                 <span className="text-sm text-purple-300/50 font-medium">/12 Months</span>
               </div>
               <ul className="space-y-4 mb-8 text-sm text-gray-100 flex-1 relative z-10">
@@ -169,7 +189,7 @@ export default function PricingPage() {
                 <FeatureItem highlight>Viral Hooks Generation</FeatureItem>
                 <FeatureItem highlight>3-4 AI Song Suggestions</FeatureItem>
               </ul>
-              <CheckoutButton onClick={() => handleSelectPlan('Unlimited Pro+', 899)} loading={loadingPlan === 'Unlimited Pro+'} label="Get Premium Now" />
+              <CheckoutButton onClick={() => handleSelectPlan('Unlimited Pro+', prices['Unlimited Pro+'])} loading={loadingPlan === 'Unlimited Pro+'} label="Get Premium Now" />
             </div>
           </div>
         </HoverCard>
@@ -183,9 +203,9 @@ export default function PricingPage() {
             <thead>
               <tr className="border-b border-white/10 text-gray-400">
                 <th className="py-5 font-bold uppercase tracking-wider">Capabilities</th>
-                <th className="py-5 font-bold uppercase tracking-wider text-center">3 Months (₹199)</th>
-                <th className="py-5 font-bold uppercase tracking-wider text-center">6 Months (₹499)</th>
-                <th className="py-5 font-bold uppercase tracking-wider text-center text-pink-400">12 Months (₹899)</th>
+                <th className="py-5 font-bold uppercase tracking-wider text-center">3 Months (₹{prices['Starter']})</th>
+                <th className="py-5 font-bold uppercase tracking-wider text-center">6 Months (₹{prices['Creator Pro']})</th>
+                <th className="py-5 font-bold uppercase tracking-wider text-center text-pink-400">12 Months (₹{prices['Unlimited Pro+']})</th>
               </tr>
             </thead>
             <tbody className="text-gray-300">

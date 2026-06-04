@@ -19,4 +19,8 @@ router.get('/stats', AdminAuthMiddleware.protect, AdminController.getStats);
 router.put('/users/:userId/status', AdminAuthMiddleware.protect, AdminController.toggleUserStatus);
 router.post('/users/:userId/remind', AdminAuthMiddleware.protect, AdminController.sendRenewalReminder);
 
+// Platform Settings
+router.get('/settings', AdminAuthMiddleware.protect, AdminController.getSettings);
+router.put('/settings', AdminAuthMiddleware.protect, AdminController.updateSettings);
+
 module.exports = router;
