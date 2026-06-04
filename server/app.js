@@ -74,7 +74,7 @@ app.use('/api/plans', planRoutes);
 
 // Root Route
 app.get('/', (req, res) => {
-    res.json({ message: 'CreatorOS AI API is running...' });
+    res.json({ message: 'CineFlow API is running...' });
 });
 
 // Expiration Check Task (Runs automatically every 24 hours)

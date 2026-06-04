@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import { 
   TrendingUp, 
@@ -20,7 +20,7 @@ import { useSearchParams } from "next/navigation";
 import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart, Bar, ComposedChart, Line } from "recharts";
 import api from "@/lib/api";
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const searchParams = useSearchParams();
   const currentTab = searchParams.get('tab') || 'dashboard';
   
@@ -683,5 +683,13 @@ export default function AdminDashboard() {
         </motion.div>
       </div>
     </motion.div>
+  );
+}
+
+export default function AdminDashboard() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }
