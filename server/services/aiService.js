@@ -39,7 +39,7 @@ class AIService {
 
         for (const modelName of modelsToTry) {
             try {
-                console.log(`Attempting AI generation with model: ${modelName}`);
+
                 const model = this.genAI.getGenerativeModel({ model: modelName });
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
@@ -48,7 +48,7 @@ class AIService {
                 // Basic JSON cleaning if Gemini wraps it in code blocks
                 const jsonStr = text.replace(/```json|```/g, '').trim();
                 const parsed = JSON.parse(jsonStr);
-                console.log(`AI generation successful using model: ${modelName}`);
+
                 return parsed;
             } catch (error) {
                 console.error(`Error with model ${modelName}:`, error.message || error);

@@ -61,7 +61,7 @@ class QueueService {
                 return;
             }
 
-            console.log(`[QueueService] Starting render for Reel ${reel._id}`);
+
             reel.status = 'processing';
             await reel.save();
 
@@ -77,8 +77,8 @@ class QueueService {
 
             try {
                 // 1. Download image
-                console.log(`[QueueService] Received uploaded image: ${reel.sourceImage}`);
-                console.log(`[QueueService] Downloading user image...`);
+
+
                 await downloadFile(reel.sourceImage, imagePath);
 
                 if (!fs.existsSync(imagePath) || fs.statSync(imagePath).size === 0) {
@@ -90,7 +90,7 @@ class QueueService {
                 let hasAudio = false;
                 
                 if (finalAudioUrl) {
-                    console.log(`[QueueService] Using soundtrack: ${finalAudioUrl}`);
+
                     try {
                         if (finalAudioUrl.includes('youtube.com') || finalAudioUrl.includes('youtu.be')) {
                             await downloadYoutubeAudio(finalAudioUrl, audioPath);
@@ -135,10 +135,9 @@ class QueueService {
                 const plan = reel.user?.subscription?.plan || 'free';
                 const needsWatermark = plan === 'free';
 
-                console.log(`[QueueService] FFmpeg input image: ${imagePath}`);
-                console.log(`[QueueService] Final render path: ${outPath}`);
-                console.log(`[QueueService] Processing FFmpeg... [${finalW}x${finalH}, ${fps}fps, ${resolution}] - Plan: ${plan}`);
-                
+
+
+
                 // 4. Render video via FFmpeg
                 await new Promise((resolve, reject) => {
                     let cmd = ffmpeg().input(imagePath).loop(1);
@@ -186,7 +185,7 @@ class QueueService {
                 });
 
                 // 5. Upload to Cloudinary
-                console.log(`[QueueService] Uploading to Cloudinary...`);
+
                 io.emit('reelStatusUpdate', { reelId: reel._id, status: 'processing', progress: 95 });
                 const uploadRes = await cloudinary.uploader.upload(outPath, { resource_type: "video", folder: "creatoros_reels" });
                 
@@ -218,7 +217,7 @@ class QueueService {
                 const totalExports = await Reel.countDocuments({ status: 'completed' });
                 io.emit('analyticsUpdate', { metric: 'totalExports', value: totalExports });
 
-                console.log(`[QueueService] Render completed for Reel ${reel._id}`);
+
             } catch (renderError) {
                 console.error('[QueueService] Full Render Error:', renderError);
                 reel.status = 'failed';

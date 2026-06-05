@@ -87,7 +87,6 @@ const emailService = require('./services/emailService');
 
 const scanSubscriptionExpirations = async () => {
     try {
-        console.log('[Scheduler] Scanning expiring subscription plans...');
         const threeDaysFromNow = new Date();
         threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
         const today = new Date();
@@ -101,7 +100,6 @@ const scanSubscriptionExpirations = async () => {
             }
         });
 
-        console.log(`[Scheduler] Found ${usersToExpire.length} users with expiring subscription plans.`);
         for (const user of usersToExpire) {
             const planName = user.subscription.plan || 'Premium Plan';
             const expDateStr = new Date(user.subscription.endDate).toLocaleDateString('en-US', {
@@ -111,7 +109,6 @@ const scanSubscriptionExpirations = async () => {
             });
 
             await emailService.sendRenewalReminderEmail(user.email, user.name, planName, expDateStr);
-            console.log(`[Scheduler] Automatically dispatched expiration warning email to ${user.email}`);
         }
     } catch (err) {
         console.error('[Scheduler] Expiration scan error:', err);
@@ -131,9 +128,7 @@ const server = http.createServer(app);
 // Initialize Socket.io
 const io = socket.init(server);
 io.on('connection', (client) => {
-    console.log('[Socket.io] Client connected:', client.id);
     client.on('disconnect', () => {
-        console.log('[Socket.io] Client disconnected:', client.id);
     });
 });
 

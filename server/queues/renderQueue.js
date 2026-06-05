@@ -57,7 +57,7 @@ async function processJob(jobId, data) {
     
     job.returnvalue = { videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" };
     job.state = 'completed';
-    console.log(`Job ${jobId} has completed!`);
+
   } catch (err) {
     job.error = err.message;
     job.state = 'failed';

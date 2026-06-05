@@ -29,30 +29,28 @@ const checkEnvVariables = () => {
         reset: '\x1b[0m'
     };
 
-    console.log(`\n${colors.cyan}==========================================`);
-    console.log(`      CREATOR OS AI - ENVIRONMENT CHECK   `);
-    console.log(`==========================================${colors.reset}\n`);
+
+
 
     // Check required variables
     for (const [key, name] of Object.entries(requiredVars)) {
         if (!process.env[key] || process.env[key].trim() === '') {
-            console.log(`${colors.red}✗ Missing Critical: ${name} (${key})${colors.reset}`);
+
             hasCriticalError = true;
         } else {
-            console.log(`${colors.green}✓ ${name} Ready${colors.reset}`);
+
         }
     }
 
     // Check optional variables
     for (const [key, name] of Object.entries(optionalVars)) {
         if (!process.env[key] || process.env[key].trim() === '') {
-            console.log(`${colors.yellow}⚠ Missing Optional: ${name} (${key})${colors.reset}`);
+
         } else {
-            console.log(`${colors.green}✓ ${name} Ready${colors.reset}`);
+
         }
     }
 
-    console.log(`\n${colors.cyan}==========================================${colors.reset}\n`);
 
     if (hasCriticalError) {
         console.error(`${colors.red}[FATAL] Critical environment variables are missing. Please check your .env file.${colors.reset}`);
