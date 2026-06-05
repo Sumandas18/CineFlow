@@ -131,7 +131,9 @@ export function Sidebar({ user }: { user: any }) {
               <button 
                 onClick={() => {
                   localStorage.removeItem('cineflow_persistent');
+                  localStorage.removeItem('cineflow_token');
                   sessionStorage.removeItem('cineflow_session_active');
+                  sessionStorage.removeItem('cineflow_token');
                   api.post('/auth/logout').then(() => window.location.href = '/').catch(() => window.location.href = '/');
                 }}
                 className="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold transition-colors shadow-lg shadow-red-500/20"

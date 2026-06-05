@@ -5,6 +5,17 @@ const api = axios.create({
   withCredentials: true, // Important for cookies/sessions
 });
 
+// Attach token from localStorage/sessionStorage
+api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('cineflow_token') || sessionStorage.getItem('cineflow_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
+
 // Optional: Add interceptors for error handling or auth tokens
 api.interceptors.response.use(
   (response) => response,

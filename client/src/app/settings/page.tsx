@@ -70,7 +70,9 @@ export default function SettingsPage() {
     try {
       await api.delete('/users/delete');
       localStorage.removeItem('cineflow_persistent');
+      localStorage.removeItem('cineflow_token');
       sessionStorage.removeItem('cineflow_session_active');
+      sessionStorage.removeItem('cineflow_token');
       await api.post('/auth/logout');
       window.location.href = '/';
     } catch (error: any) {

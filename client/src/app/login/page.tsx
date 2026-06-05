@@ -16,12 +16,14 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post(`/auth/login`, { email, password, remember });
+      const res = await api.post(`/auth/login`, { email, password, remember });
       if (remember) {
         localStorage.setItem('cineflow_persistent', 'true');
+        localStorage.setItem('cineflow_token', res.data.token);
       } else {
         localStorage.removeItem('cineflow_persistent');
         sessionStorage.setItem('cineflow_session_active', 'true');
+        sessionStorage.setItem('cineflow_token', res.data.token);
       }
       window.location.href = "/dashboard";
     } catch (error: any) {
