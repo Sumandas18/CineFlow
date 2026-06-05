@@ -72,7 +72,7 @@ export function Sidebar({ user, isOpen, setIsOpen }: { user: any, isOpen?: boole
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   return (
-    <div className={`w-64 border-r border-white/10 bg-black/80 lg:bg-black/40 backdrop-blur-xl flex flex-col h-screen fixed left-0 top-0 z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+    <div className={`w-64 border-r border-white/10 bg-black/80 lg:bg-black/40 backdrop-blur-md flex flex-col h-screen fixed left-0 top-0 z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
       <div className="p-6 border-b border-white/10 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" onClick={() => setIsOpen && setIsOpen(false)}>
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
@@ -180,7 +180,7 @@ export function Topbar({ user, aiLimits, toggleSidebar }: { user: any, aiLimits?
   const creditsLeft = aiLimits ? aiLimits.remaining : 0;
 
   return (
-    <div className="h-16 border-b border-white/10 bg-black/40 backdrop-blur-xl flex items-center justify-between lg:justify-end px-4 lg:px-6 sticky top-0 z-40">
+    <div className="h-16 border-b border-white/10 bg-black/40 backdrop-blur-md flex items-center justify-between lg:justify-end px-4 lg:px-6 sticky top-0 z-40">
       {toggleSidebar && (
         <button className="lg:hidden text-white hover:text-purple-400 transition-colors" onClick={toggleSidebar}>
           <Menu size={24} />

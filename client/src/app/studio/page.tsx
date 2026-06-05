@@ -182,7 +182,7 @@ export default function AIStudioPage() {
       {/* Right Sidebar - Result Card */}
       <div className="w-full lg:w-[500px] flex flex-col mt-4 lg:mt-0">
          {result ? (
-            <motion.div initial={{opacity: 0, x: 20}} animate={{opacity: 1, x: 0}} className="bg-zinc-900/80 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-xl h-full group hover:border-purple-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.15)]">
+            <motion.div initial={{opacity: 0, x: 20}} animate={{opacity: 1, x: 0}} className="bg-zinc-900/80 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-md h-full group hover:border-purple-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.15)]">
                {/* Top Image/Video */}
                <div className="h-64 w-full bg-[#0a0a0a] relative shrink-0">
                   {result.resourceType === 'video' ? (

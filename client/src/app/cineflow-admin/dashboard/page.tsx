@@ -613,7 +613,7 @@ function AdminDashboardContent() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Chart */}
-        <motion.div variants={itemVariants} className="lg:col-span-2 bg-[#121212]/80 backdrop-blur-xl border border-blue-800/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        <motion.div variants={itemVariants} className="lg:col-span-2 bg-[#121212]/80 backdrop-blur-md border border-blue-800/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
           <div className="flex items-center justify-between mb-8 relative z-10">
             <div>
               <h3 className="text-lg font-bold text-white mb-1">Platform Activity</h3>
@@ -655,7 +655,7 @@ function AdminDashboardContent() {
         </motion.div>
 
         {/* Microservices Status */}
-        <motion.div variants={itemVariants} className="bg-[#121212]/80 backdrop-blur-xl border border-blue-800/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden flex flex-col">
+        <motion.div variants={itemVariants} className="bg-[#121212]/80 backdrop-blur-md border border-blue-800/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden flex flex-col">
           <h3 className="text-lg font-bold text-white mb-1">Microservices</h3>
           <p className="text-xs text-slate-400 mb-8">Live system nodes</p>
           

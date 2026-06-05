@@ -80,7 +80,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
       )}
       
       {/* Sidebar */}
-      <aside className={`w-64 border-r border-blue-900/40 bg-[#040f26]/95 lg:bg-[#040f26]/60 backdrop-blur-xl flex flex-col justify-between fixed inset-y-0 left-0 z-40 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:relative lg:translate-x-0'}`}>
+      <aside className={`w-64 border-r border-blue-900/40 bg-[#040f26]/95 lg:bg-[#040f26]/60 backdrop-blur-md flex flex-col justify-between fixed inset-y-0 left-0 z-40 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:relative lg:translate-x-0'}`}>
         <div>
           {/* Logo */}
           <div className="h-20 flex items-center px-8 border-b border-blue-900/40 gap-2">
