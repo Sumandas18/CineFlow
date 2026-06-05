@@ -2,11 +2,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import api from '@/lib/api';
-import { LayoutDashboard, Wand2, BarChart2, CreditCard, LogOut, Settings, Bell, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Wand2, BarChart2, CreditCard, LogOut, Settings, Bell, Sparkles, Menu, X } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [aiLimits, setAiLimits] = useState<any>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const fetchUser = useCallback(() => {
     api.get('/auth/me?t=' + new Date().getTime()).then(res => {
@@ -48,10 +49,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-transparent flex">
-      <Sidebar user={user} />
-      <div className="flex-1 flex flex-col ml-64 min-h-screen">
-        <Topbar user={user} aiLimits={aiLimits} />
-        <main className="flex-1 p-6 z-10 relative">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      <Sidebar user={user} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <div className="flex-1 flex flex-col lg:ml-64 w-full min-h-screen transition-all duration-300">
+        <Topbar user={user} aiLimits={aiLimits} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+        <main className="flex-1 p-4 lg:p-6 z-10 relative overflow-x-hidden">
           {children}
         </main>
       </div>
@@ -59,18 +67,25 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 }
 
-export function Sidebar({ user }: { user: any }) {
+export function Sidebar({ user, isOpen, setIsOpen }: { user: any, isOpen?: boolean, setIsOpen?: (val: boolean) => void }) {
     
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   return (
-    <div className="w-64 border-r border-white/10 bg-black/40 backdrop-blur-xl flex flex-col h-screen fixed left-0 top-0">
-      <Link href="/" className="p-6 border-b border-white/10 flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
-          <Sparkles size={16} className="text-white" />
-        </div>
-        <span className="text-xl font-bold tracking-tighter">CineFlow</span>
-      </Link>
+    <div className={`w-64 border-r border-white/10 bg-black/80 lg:bg-black/40 backdrop-blur-xl flex flex-col h-screen fixed left-0 top-0 z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <div className="p-6 border-b border-white/10 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" onClick={() => setIsOpen && setIsOpen(false)}>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+            <Sparkles size={16} className="text-white" />
+          </div>
+          <span className="text-xl font-bold tracking-tighter">CineFlow</span>
+        </Link>
+        {setIsOpen && (
+          <button className="lg:hidden text-gray-400 hover:text-white" onClick={() => setIsOpen(false)}>
+            <X size={20} />
+          </button>
+        )}
+      </div>
       
       <div className="p-4 border-b border-white/10">
         <div className="flex items-center gap-3 w-full">
@@ -158,15 +173,20 @@ function NavItem({ href, icon, label, active = false }: { href: string, icon: Re
   );
 }
 
-export function Topbar({ user, aiLimits }: { user: any, aiLimits?: any }) {
+export function Topbar({ user, aiLimits, toggleSidebar }: { user: any, aiLimits?: any, toggleSidebar?: () => void }) {
   const isPremium = user?.subscription?.status === 'active';
   const isUnlimited = isPremium && user?.subscription?.plan === 'Unlimited Pro+';
   const totalCredits = aiLimits ? aiLimits.maxLimit : (isPremium ? 50 : 3);
   const creditsLeft = aiLimits ? aiLimits.remaining : 0;
 
   return (
-    <div className="h-16 border-b border-white/10 bg-black/40 backdrop-blur-xl flex items-center justify-end px-6 sticky top-0 z-40">
-      <div className="flex items-center gap-4">
+    <div className="h-16 border-b border-white/10 bg-black/40 backdrop-blur-xl flex items-center justify-between lg:justify-end px-4 lg:px-6 sticky top-0 z-40">
+      {toggleSidebar && (
+        <button className="lg:hidden text-white hover:text-purple-400 transition-colors" onClick={toggleSidebar}>
+          <Menu size={24} />
+        </button>
+      )}
+      <div className="flex items-center gap-2 lg:gap-4">
         {user && (
           <div className="px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-2 transition-all">
             <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">⚡ {creditsLeft}/{totalCredits} Daily Tokens</span>

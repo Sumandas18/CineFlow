@@ -101,7 +101,7 @@ export default function AIStudioPage() {
   const isLimitReached = (totalCredits < 1000) && (usageCount >= totalCredits);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] relative">
+    <div className="flex flex-col lg:h-[calc(100vh-8rem)] min-h-[calc(100vh-8rem)] relative">
       
 
 
@@ -121,7 +121,7 @@ export default function AIStudioPage() {
         </div>
       )}
 
-      <div className={`flex gap-8 max-w-7xl mx-auto w-full flex-1 min-h-0 ${isLimitReached ? 'pointer-events-none opacity-30 blur-[2px] select-none' : ''}`}>
+      <div className={`flex flex-col lg:flex-row gap-4 lg:gap-8 max-w-7xl mx-auto w-full flex-1 min-h-0 pb-10 lg:pb-0 ${isLimitReached ? 'pointer-events-none opacity-30 blur-[2px] select-none' : ''}`}>
         {/* Left Sidebar - Upload Area */}
         <div className="flex-1 bg-zinc-900/60 border border-white/5 rounded-3xl p-8 flex flex-col backdrop-blur-md">
         <h2 className="text-2xl font-bold text-white mb-2">AI Image Analyzer</h2>
@@ -180,7 +180,7 @@ export default function AIStudioPage() {
       </div>
 
       {/* Right Sidebar - Result Card */}
-      <div className="w-[500px] flex flex-col">
+      <div className="w-full lg:w-[500px] flex flex-col mt-4 lg:mt-0">
          {result ? (
             <motion.div initial={{opacity: 0, x: 20}} animate={{opacity: 1, x: 0}} className="bg-zinc-900/80 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-xl h-full group hover:border-purple-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.15)]">
                {/* Top Image/Video */}

@@ -22,6 +22,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   const pathname = usePathname();
   const [admin, setAdmin] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -70,8 +71,16 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
   return (
     <div className="min-h-screen bg-[#020617] text-white flex font-sans overflow-hidden">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      
       {/* Sidebar */}
-      <aside className="w-64 border-r border-blue-900/40 bg-[#040f26]/60 backdrop-blur-xl flex flex-col justify-between relative z-20">
+      <aside className={`w-64 border-r border-blue-900/40 bg-[#040f26]/95 lg:bg-[#040f26]/60 backdrop-blur-xl flex flex-col justify-between fixed inset-y-0 left-0 z-40 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:relative lg:translate-x-0'}`}>
         <div>
           {/* Logo */}
           <div className="h-20 flex items-center px-8 border-b border-blue-900/40 gap-2">
@@ -91,6 +100,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                 <a 
                   key={item.name} 
                   href={item.href}
+                  onClick={() => setIsSidebarOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all relative ${
                     isActive 
                       ? 'bg-blue-500/10 text-cyan-400 border border-blue-500/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]' 
@@ -138,12 +148,12 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
         <MeshGradientBackground />
 
         {/* Header */}
-        <header className="h-20 border-b border-blue-900/40 bg-[#040f26]/40 backdrop-blur-md flex items-center justify-between px-8 relative z-10">
+        <header className="h-20 border-b border-blue-900/40 bg-[#040f26]/40 backdrop-blur-md flex items-center justify-between px-4 lg:px-8 relative z-10">
           <div className="flex items-center gap-4">
-            <button className="text-slate-400 hover:text-white transition-colors hover:scale-110 duration-200">
-              <Menu size={20} />
+            <button className="text-slate-400 hover:text-white transition-colors hover:scale-110 duration-200 lg:hidden" onClick={() => setIsSidebarOpen(true)}>
+              <Menu size={24} />
             </button>
-            <h2 className="text-lg font-bold text-slate-200">CineFlow Admin</h2>
+            <h2 className="text-lg font-bold text-slate-200 hidden sm:block">CineFlow Admin</h2>
           </div>
 
           <div className="flex items-center gap-6">
