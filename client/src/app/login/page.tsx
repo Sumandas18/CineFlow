@@ -17,6 +17,9 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const res = await api.post(`/auth/login`, { email, password, remember });
+      const maxAge = remember ? 30 * 24 * 60 * 60 : 24 * 60 * 60;
+      document.cookie = `token=${res.data.token}; path=/; max-age=${maxAge}; SameSite=Lax`;
+      
       if (remember) {
         localStorage.setItem('cineflow_persistent', 'true');
         localStorage.setItem('cineflow_token', res.data.token);
