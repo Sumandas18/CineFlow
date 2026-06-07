@@ -121,7 +121,7 @@ export default function PricingPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-8">
         {/* 3 Months Plan */}
         <HoverCard delay={0.1}>
-          <div className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl h-full flex flex-col group-hover:border-purple-500/30 transition-all duration-500 group-hover:bg-zinc-900/60 shadow-xl group-hover:shadow-[0_0_40px_rgba(168,85,247,0.15)] relative overflow-hidden">
+          <div className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 backdrop-blur-sm md:backdrop-blur-xl h-full flex flex-col group-hover:border-purple-500/30 transition-all duration-300 active:scale-[0.98] active:bg-zinc-900/60 shadow-xl group-hover:shadow-[0_0_40px_rgba(168,85,247,0.15)] relative overflow-hidden">
             <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
               <Zap size={80} className="text-purple-400" />
             </div>
@@ -143,7 +143,7 @@ export default function PricingPage() {
 
         {/* 6 Months Plan */}
         <HoverCard delay={0.2}>
-          <div className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl h-full flex flex-col group-hover:border-purple-500/30 transition-all duration-500 group-hover:bg-zinc-900/60 shadow-xl group-hover:shadow-[0_0_40px_rgba(168,85,247,0.15)] relative overflow-hidden">
+          <div className="bg-zinc-900/40 border border-white/10 rounded-3xl p-8 backdrop-blur-sm md:backdrop-blur-xl h-full flex flex-col group-hover:border-purple-500/30 transition-all duration-300 active:scale-[0.98] active:bg-zinc-900/60 shadow-xl group-hover:shadow-[0_0_40px_rgba(168,85,247,0.15)] relative overflow-hidden">
             <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
               <Sparkles size={80} className="text-cyan-400" />
             </div>
@@ -172,7 +172,7 @@ export default function PricingPage() {
                 <Star size={12} className="fill-white" /> Best Value
               </span>
             </div>
-            <div className="bg-gradient-to-b from-[#2a0845]/80 to-[#1a0b2e]/80 border-2 border-purple-500/50 rounded-3xl p-8 backdrop-blur-xl h-full flex flex-col group-hover:border-pink-500/50 transition-all duration-500 shadow-[0_0_30px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_50px_rgba(236,72,153,0.3)] relative overflow-hidden">
+            <div className="bg-gradient-to-b from-[#2a0845]/80 to-[#1a0b2e]/80 border-2 border-purple-500/50 rounded-3xl p-8 backdrop-blur-sm md:backdrop-blur-xl h-full flex flex-col group-hover:border-pink-500/50 transition-all duration-300 active:scale-[0.98] shadow-[0_0_30px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_50px_rgba(236,72,153,0.3)] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-pink-500/20 blur-[60px] rounded-full pointer-events-none"></div>
               
               <h3 className="text-2xl font-bold text-white mb-2 mt-2">Unlimited Pro+</h3>
@@ -197,7 +197,7 @@ export default function PricingPage() {
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-24">
         <h3 className="text-3xl font-bold text-center mb-10 tracking-tight">Compare Plan Features</h3>
-        <div className="bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl overflow-hidden relative">
+        <div className="bg-black/40 border border-white/10 rounded-3xl p-4 md:p-8 backdrop-blur-sm md:backdrop-blur-xl shadow-2xl overflow-hidden relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-500/10 blur-[100px] pointer-events-none rounded-full"></div>
           <table className="w-full text-left text-sm relative z-10">
             <thead>
