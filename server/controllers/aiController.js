@@ -205,7 +205,8 @@ class AIController {
             if (isProPlus) {
                 prompt += `
             - "viralHooks": an array of 3 short, curiosity-inducing text hooks to place on the video screen.
-            - "songSuggestions": an array of 3 trending song names (must include a mix of English, Hindi, and Bengali songs) that fit the mood of this media. (Format: Artist - Song).`;
+            - "songSuggestions": an array of 3 trending song names (must include a mix of English, Hindi, and Bengali songs) that fit the mood of this media. (Format: Artist - Song).
+            - "bestTimeToPost": a specific time (e.g. 'Today at 6:30 PM' or 'Tuesday at 8:00 PM') that is best for this type of content.`;
             }
             
             prompt += `\nOutput strictly valid JSON and nothing else. No markdown blocks.`;
@@ -280,7 +281,8 @@ class AIController {
                 captions: aiData.captions || [],
                 hashtags: aiData.hashtags || [],
                 viralHooks: aiData.viralHooks,
-                songSuggestions: aiData.songSuggestions
+                songSuggestions: aiData.songSuggestions,
+                bestTimeToPost: aiData.bestTimeToPost
             });
         } catch (error) {
             next(error);

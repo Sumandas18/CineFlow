@@ -67,7 +67,8 @@ export default function AIStudioPage() {
           captions: res.data.captions,
           hashtags: res.data.hashtags,
           viralHooks: res.data.viralHooks,
-          songSuggestions: res.data.songSuggestions
+          songSuggestions: res.data.songSuggestions,
+          bestTimeToPost: res.data.bestTimeToPost
         });
         
         // Refresh user to update usage count locally
@@ -127,7 +128,7 @@ export default function AIStudioPage() {
         <h2 className="text-2xl font-bold text-white mb-2">AI Image Analyzer</h2>
         <p className="text-gray-400 text-sm mb-8">Upload your image and let our AI vision engine detect the perfect viral captions and hashtags.</p>
         
-        <label className={`flex-1 border-2 border-dashed ${imagePreview ? 'border-purple-500/50 bg-purple-500/5 p-2' : 'border-white/10 p-8'} rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 relative group hover:border-purple-500/50 hover:bg-purple-500/5 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]`}>
+        <label className={`flex-1 min-h-[250px] lg:min-h-[300px] border-2 border-dashed ${imagePreview ? 'border-purple-500/50 bg-purple-500/5 p-2' : 'border-white/10 p-8'} rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 relative group hover:border-purple-500/50 hover:bg-purple-500/5 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)] w-full`}>
            {imagePreview ? (
               <div className="w-full h-full relative rounded-xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center shadow-inner">
                  {imageFile?.type.startsWith('video/') ? (
@@ -166,9 +167,9 @@ export default function AIStudioPage() {
           <button 
             onClick={handleGenerate}
             disabled={!imageFile || isGenerating || isLimitReached}
-            className="w-full max-w-xl py-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-lg hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)] disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-2"
+            className="w-full max-w-xl py-4 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm md:text-lg hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)] disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-2 text-center leading-tight"
           >
-            <Sparkles size={24} />
+            <Sparkles size={20} className="shrink-0" />
             {isGenerating 
               ? "AI is detecting your media... (Wait 6-7s)" 
               : isLimitReached 
@@ -243,7 +244,7 @@ export default function AIStudioPage() {
                     </>
                   )}
 
-                  {result.songSuggestions && (
+                   {result.songSuggestions && (
                     <>
                       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2 mt-8">
                          <Sparkles className="text-cyan-400" size={20} /> AI Song Suggestions (Pro+)
@@ -255,6 +256,17 @@ export default function AIStudioPage() {
                               <span>{song}</span>
                             </div>
                          ))}
+                      </div>
+                    </>
+                  )}
+
+                  {result.bestTimeToPost && (
+                    <>
+                      <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2 mt-8">
+                         <TrendingUp className="text-green-400" size={20} /> Best Time to Post (Pro+)
+                      </h3>
+                      <div className="bg-green-500/10 border border-green-500/20 p-4 rounded-xl text-sm text-green-200/90 shadow-sm flex items-center gap-3 font-bold">
+                        🕒 {result.bestTimeToPost}
                       </div>
                     </>
                   )}
