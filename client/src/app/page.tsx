@@ -158,15 +158,24 @@ export default function LandingPage() {
       >
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
-        {/* Sleek Premium Glass Orb (Top Left) */}
-        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-8 z-50 group cursor-pointer hidden md:flex flex-col items-center justify-center w-[72px] h-[72px] hover:scale-105 transition-transform duration-300">
-          {/* Animated gradient ring */}
-          <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0_280deg,rgba(236,72,153,0.8)_360deg)] animate-[spin_3s_linear_infinite] opacity-80 group-hover:opacity-100"></div>
+        {/* Starburst Premium Badge (Top Left) */}
+        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-8 z-50 group cursor-pointer hidden md:flex flex-col items-center justify-center w-[84px] h-[84px] hover:scale-110 transition-transform duration-300">
+          {/* Animated Glow */}
+          <div className="absolute inset-0 bg-yellow-400 rounded-full animate-pulse blur-xl opacity-40"></div>
           
-          {/* Inner Glass Body */}
-          <div className="absolute inset-[2px] rounded-full bg-black/60 backdrop-blur-md flex flex-col items-center justify-center border border-white/5 shadow-[0_0_20px_rgba(236,72,153,0.15)] group-hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] transition-all duration-300">
-            <Sparkles size={14} className="text-pink-400 mb-0.5 group-hover:text-pink-300 transition-colors" />
-            <span className="text-[8px] font-black text-center leading-[1.2] uppercase tracking-widest text-white/80 group-hover:text-white transition-colors">
+          {/* Starburst Shape (12 points) */}
+          <div className="absolute inset-0 flex items-center justify-center animate-[spin_15s_linear_infinite] group-hover:scale-105 transition-all">
+            <div className="absolute w-[60px] h-[60px] bg-gradient-to-br from-yellow-300 to-amber-500 rounded-[8px] shadow-lg border border-yellow-200/50"></div>
+            <div className="absolute w-[60px] h-[60px] bg-gradient-to-br from-yellow-300 to-amber-500 rounded-[8px] shadow-lg border border-yellow-200/50 rotate-[30deg]"></div>
+            <div className="absolute w-[60px] h-[60px] bg-gradient-to-br from-yellow-300 to-amber-500 rounded-[8px] shadow-lg border border-yellow-200/50 rotate-[60deg]"></div>
+          </div>
+          
+          {/* Clear, Legible Text */}
+          <div className="relative z-10 flex flex-col items-center justify-center">
+            <span className="text-[12px] font-black text-black leading-none tracking-widest drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] mb-0.5">
+              GET
+            </span>
+            <span className="text-[18px] font-black text-black leading-none tracking-wider drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
               PRO
             </span>
           </div>
