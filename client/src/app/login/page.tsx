@@ -25,15 +25,14 @@ export default function LoginPage() {
       const res = await api.post(`/auth/login`, { email, password, remember });
       const maxAge = remember ? 30 * 24 * 60 * 60 : 24 * 60 * 60;
       document.cookie = `token=${res.data.token}; path=/; max-age=${maxAge}; SameSite=Lax`;
+      localStorage.setItem('cineflow_token', res.data.token);
       
       if (remember) {
         localStorage.setItem('cineflow_persistent', 'true');
-        localStorage.setItem('cineflow_token', res.data.token);
       } else {
         localStorage.removeItem('cineflow_persistent');
-        sessionStorage.setItem('cineflow_session_active', 'true');
-        sessionStorage.setItem('cineflow_token', res.data.token);
       }
+      
       window.location.href = "/dashboard";
     } catch (error: any) {
       alert(error.response?.data?.message || "Failed to login");
