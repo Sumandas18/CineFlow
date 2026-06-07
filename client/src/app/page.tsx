@@ -159,7 +159,7 @@ export default function LandingPage() {
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
         {/* Starburst Premium Badge (Top Left) */}
-        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-8 z-50 group cursor-pointer hidden md:flex flex-col items-center justify-center w-[84px] h-[84px] hover:scale-110 transition-transform duration-300">
+        <Link href={isAuthenticated ? "/pricing" : "/login"} className="absolute top-12 lg:top-32 left-4 lg:-left-8 z-50 group cursor-pointer hidden md:flex flex-col items-center justify-center w-[84px] h-[84px] hover:scale-110 transition-transform duration-300">
           {/* Animated Glow */}
           <div className="absolute inset-0 bg-yellow-400 rounded-full animate-pulse blur-xl opacity-40"></div>
           
@@ -217,7 +217,7 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto"
           >
-            <Link href="/studio" className="w-full md:w-auto text-center px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm md:text-base hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+            <Link href={isAuthenticated ? "/studio" : "/login"} className="w-full md:w-auto text-center px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm md:text-base hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)]">
               Open AI Studio
             </Link>
             <button 
