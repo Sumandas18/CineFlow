@@ -107,7 +107,7 @@ export default function AIStudioPage() {
 
 
       {isLimitReached && (
-        <div className="absolute inset-0 z-50 rounded-3xl bg-black/60 backdrop-blur-md border border-white/10 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 z-50 rounded-3xl bg-black/60 backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center">
           <div className="bg-zinc-900/90 p-8 rounded-3xl border border-pink-500/50 shadow-[0_0_50px_rgba(236,72,153,0.3)] text-center max-w-md relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-pink-500/20 blur-[50px] rounded-full pointer-events-none"></div>
             <div className="w-16 h-16 rounded-full bg-pink-500/20 flex items-center justify-center mx-auto mb-6 relative z-10">
@@ -124,7 +124,7 @@ export default function AIStudioPage() {
 
       <div className={`flex flex-col lg:flex-row gap-4 lg:gap-8 max-w-7xl mx-auto w-full flex-1 min-h-0 pb-10 lg:pb-0 ${isLimitReached ? 'pointer-events-none opacity-30 blur-[2px] select-none' : ''}`}>
         {/* Left Sidebar - Upload Area */}
-        <div className="flex-1 bg-zinc-900/60 border border-white/5 rounded-3xl p-8 flex flex-col backdrop-blur-md">
+        <div className="flex-1 bg-zinc-900/60 border border-white/5 rounded-3xl p-8 flex flex-col backdrop-blur-sm">
         <h2 className="text-2xl font-bold text-white mb-2">AI Image Analyzer</h2>
         <p className="text-gray-400 text-sm mb-8">Upload your image and let our AI vision engine detect the perfect viral captions and hashtags.</p>
         
@@ -200,7 +200,7 @@ export default function AIStudioPage() {
       {/* Right Sidebar - Result Card */}
       <div className="w-full lg:w-[500px] flex flex-col mt-4 lg:mt-0">
          {result ? (
-            <motion.div initial={{opacity: 0, x: 20}} animate={{opacity: 1, x: 0}} className="bg-zinc-900/80 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-md h-full group hover:border-purple-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.15)]">
+            <motion.div initial={{opacity: 0, x: 20}} animate={{opacity: 1, x: 0}} className="bg-zinc-900/80 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col backdrop-blur-sm h-full group hover:border-purple-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.15)]">
                {/* Top Image/Video */}
                <div className="h-64 w-full bg-[#0a0a0a] relative shrink-0">
                   {result.resourceType === 'video' ? (
@@ -301,7 +301,7 @@ export default function AIStudioPage() {
                </div>
             </motion.div>
          ) : (
-            <div className="flex-1 bg-zinc-900/40 border border-white/5 rounded-3xl flex flex-col items-center justify-center p-8 text-center border-dashed backdrop-blur-md">
+            <div className="flex-1 bg-zinc-900/40 border border-white/5 rounded-3xl flex flex-col items-center justify-center p-8 text-center border-dashed backdrop-blur-sm">
                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mb-6">
                   <Sparkles className="text-purple-400" size={40} />
                </div>

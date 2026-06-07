@@ -248,24 +248,24 @@ export default function LandingPage() {
                 {/* Right Action Bar */}
                 <div className="absolute bottom-6 right-2 z-30 flex flex-col items-center gap-4">
                    <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center hover:bg-black/60 transition-colors">
+                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 transition-colors">
                        <Heart size={20} className="text-white fill-white" />
                      </div>
                      <span className="text-[10px] font-bold text-white drop-shadow-md">1.2M</span>
                    </div>
                    <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
                        <MessageCircle size={20} className="text-white" />
                      </div>
                      <span className="text-[10px] font-bold text-white drop-shadow-md">8.4K</span>
                    </div>
                    <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
                        <Share2 size={20} className="text-white fill-white" />
                      </div>
                      <span className="text-[10px] font-bold text-white drop-shadow-md">Share</span>
                    </div>
-                   <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+                   <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
                      <MoreHorizontal size={16} className="text-white" />
                    </div>
                 </div>
@@ -282,7 +282,7 @@ export default function LandingPage() {
                rotateY: phoneRotateY,
                translateZ: 80 
              }}
-             className="absolute top-[20%] right-[5%] px-4 py-2 rounded-xl bg-[#120b1c]/80 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-2 backdrop-blur-xl"
+             className="absolute top-[20%] right-[5%] px-4 py-2 rounded-xl bg-[#120b1c]/80 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-2 backdrop-blur-md"
            >
              <span className="text-xs font-bold text-cyan-400">+12.4k Views</span>
            </motion.div>
@@ -294,7 +294,7 @@ export default function LandingPage() {
                rotateY: phoneRotateY,
                translateZ: 60 
              }}
-             className="absolute bottom-[25%] left-[5%] px-4 py-2 rounded-xl bg-[#120b1c]/80 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-2 backdrop-blur-xl"
+             className="absolute bottom-[25%] left-[5%] px-4 py-2 rounded-xl bg-[#120b1c]/80 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-2 backdrop-blur-md"
            >
              <span className="text-xs font-bold text-pink-500">Viral Score: 92%</span>
            </motion.div>
@@ -350,7 +350,7 @@ export default function LandingPage() {
            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-20" />
            
            {/* Custom Video Controls (Smaller & Hover Only) */}
-           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
              <button onClick={togglePlay} className="text-white hover:text-purple-400 transition-colors flex items-center justify-center">
                {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
              </button>
@@ -374,7 +374,7 @@ export default function LandingPage() {
             <Link href="/studio" className="px-10 py-4 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               Open AI Studio
             </Link>
-            <Link href="/pricing" className="px-10 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors backdrop-blur-md">
+            <Link href="/pricing" className="px-10 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors backdrop-blur-sm">
               View Detailed Plans
             </Link>
           </div>
