@@ -121,9 +121,9 @@ export default function LandingPage() {
   return (
     <div className="text-white overflow-x-hidden font-sans selection:bg-purple-500/30 relative">
       
-      {/* Navbar with Premium Glass Effect */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0510]/40 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4 flex items-center justify-between">
+      {/* Floating Pill Navbar */}
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-50 bg-[#0a0510]/60 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-full">
+        <div className="px-4 lg:px-8 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
               <Sparkles size={16} className="text-white" />
@@ -158,26 +158,23 @@ export default function LandingPage() {
       >
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
-        {/* Floating Premium Orb (Top Left) */}
-        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-10 z-50 group cursor-pointer flex flex-col items-center justify-center w-20 h-20 lg:w-24 lg:h-24">
-          <div className="absolute inset-0 bg-pink-500 rounded-full animate-ping opacity-40"></div>
-          <div className="relative w-full h-full bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex flex-col items-center justify-center border border-white/30 shadow-[0_0_30px_rgba(236,72,153,0.6)] group-hover:scale-110 transition-transform duration-300">
-            <Sparkles size={16} className="text-yellow-300 mb-1 animate-pulse" />
-            <span className="text-[9px] lg:text-[10px] font-black text-center leading-[1.1] uppercase tracking-wider text-white drop-shadow-md">
-              Get<br/>Premium
-            </span>
-          </div>
-        </Link>
-        
         {/* Left Content */}
         <div className="w-full lg:w-1/2 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-6"
+            className="flex flex-wrap items-center gap-3 mb-6"
           >
-            AI-POWERED VIRAL GROWTH
+            <div className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest">
+              AI-POWERED VIRAL GROWTH
+            </div>
+            
+            <Link href="/pricing" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-[10px] font-bold text-white uppercase tracking-wider group">
+              <Sparkles size={12} className="text-yellow-400" />
+              <span>Premium Access</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
           </motion.div>
           
           <motion.h1 
