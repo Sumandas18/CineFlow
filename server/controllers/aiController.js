@@ -195,7 +195,7 @@ class AIController {
             // call gemini api to analyze the visual content
             let aiData = {};
             const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY.trim());
-            const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+            const modelsToTry = ["gemini-3.5-flash", "gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
             
             let prompt = `You are an expert social media manager. Analyze this attached media (${resourceType}) visually and return a JSON object ONLY. 
             The JSON must contain:

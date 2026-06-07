@@ -244,10 +244,18 @@ function AdminDashboardContent() {
             <div className="space-y-4 relative z-10">
               <div className="p-4 rounded-2xl bg-black/50 border border-blue-800/30 flex items-center justify-between group cursor-pointer hover:border-blue-500/50 transition-colors">
                 <div>
-                  <div className="text-sm font-bold text-blue-400 flex items-center gap-2">gemini-2.5-flash <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span></div>
-                  <div className="text-[10px] text-slate-500 mt-1">Primary Engine. Lightning fast, optimal for social media captions.</div>
+                  <div className="text-sm font-bold text-blue-400 flex items-center gap-2">gemini-3.5-flash <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span></div>
+                  <div className="text-[10px] text-slate-500 mt-1">Primary Engine. The latest and most advanced AI vision model.</div>
                 </div>
                 <div className="w-4 h-4 rounded-full border-4 border-blue-500 bg-black"></div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-black/50 border border-blue-800/30 flex items-center justify-between group cursor-pointer hover:border-white/20 transition-colors opacity-70">
+                <div>
+                  <div className="text-sm font-bold text-white flex items-center gap-2">gemini-2.5-flash <span className="bg-yellow-500/20 text-yellow-400 text-[8px] px-1.5 py-0.5 rounded border border-yellow-500/30">AUTO-FALLBACK</span></div>
+                  <div className="text-[10px] text-slate-500 mt-1">Secondary engine if 3.5 is overloaded.</div>
+                </div>
+                <div className="w-4 h-4 rounded-full border border-gray-600 bg-transparent"></div>
               </div>
 
               <div className="p-4 rounded-2xl bg-black/50 border border-blue-800/30 flex items-center justify-between group cursor-pointer hover:border-white/20 transition-colors opacity-70">
