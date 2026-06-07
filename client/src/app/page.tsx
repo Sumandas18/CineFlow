@@ -445,29 +445,40 @@ export default function LandingPage() {
           </p>
 
           {/* Map Area */}
-          <div className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center mb-10 z-0">
+          <div className="relative w-full flex items-center justify-center py-10 mb-8 z-0">
              {/* Subtle Grid */}
-             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+             <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-             {/* Map Image centered */}
-             <div 
-               className="absolute inset-0 bg-no-repeat bg-center opacity-30 mix-blend-screen" 
-               style={{ 
-                 backgroundImage: `url('/world-map.svg')`,
-                 backgroundSize: 'contain',
-                 filter: 'invert(1)'
-               }}
-             />
-             
-             {/* Map Pins connected to countries */}
-             <MapPin top="35%" left="22%" color="bg-pink-500" label="TikTok 98%" delay={0} />
-             <MapPin top="30%" left="50%" color="bg-purple-500" label="IG Reels 94%" delay={1.2} />
-             <MapPin top="48%" left="68%" color="bg-cyan-500" label="YT Shorts 89%" delay={2.5} />
-             <MapPin top="65%" left="32%" color="bg-yellow-500" label="Snapchat 85%" delay={0.8} />
-             <MapPin top="75%" left="85%" color="bg-green-500" label="Twitter 78%" delay={1.8} />
-             
-             {/* Center Glow */}
-             <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+             {/* Map Container (Preserves aspect ratio to lock pins to countries) */}
+             <div className="relative w-full max-w-[800px] aspect-[1.8/1] mx-auto">
+               
+               {/* Map Image centered */}
+               <div 
+                 className="absolute inset-0 bg-no-repeat bg-center opacity-30 mix-blend-screen pointer-events-none" 
+                 style={{ 
+                   backgroundImage: `url('/world-map.svg')`,
+                   backgroundSize: '100% 100%',
+                   filter: 'invert(1)'
+                 }}
+               />
+               
+               {/* Map Pins properly distributed across the globe */}
+               {/* North America */}
+               <MapPin top="28%" left="18%" color="bg-pink-500" label="TikTok 98%" delay={0} />
+               {/* South America */}
+               <MapPin top="68%" left="32%" color="bg-yellow-500" label="Snapchat 85%" delay={0.8} />
+               {/* Europe */}
+               <MapPin top="22%" left="52%" color="bg-purple-500" label="IG Reels 94%" delay={1.2} />
+               {/* Africa */}
+               <MapPin top="55%" left="54%" color="bg-orange-500" label="Facebook 80%" delay={3.1} />
+               {/* Asia (India) */}
+               <MapPin top="46%" left="70%" color="bg-cyan-500" label="YT Shorts 89%" delay={2.5} />
+               {/* Australia */}
+               <MapPin top="78%" left="84%" color="bg-green-500" label="Twitter 78%" delay={1.8} />
+               
+               {/* Center Glow */}
+               <div className="absolute top-1/2 left-1/2 w-[60%] h-[60%] bg-purple-600/20 blur-[80px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+             </div>
           </div>
 
           {/* CTA Buttons (Bottom Centered) */}
