@@ -118,6 +118,33 @@ export default function LandingPage() {
   const phoneRotateY = useTransform(springX, [-1, 1], [-20, 20]);
   const phoneTranslateZ = useTransform(springY, [-1, 1], [0, 50]);
 
+  const reelsData = [
+    {
+      src: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop",
+      caption: "Wait for the cinematic drop! 🎬✨ #viral #ai #gaming",
+      likes: "1.2M", comments: "8.4K", username: "@cineflow_ai",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&h=900&fit=crop",
+      caption: "Morning routine for the perfect start! 🧘‍♀️🌿 #fitness",
+      likes: "850K", comments: "3.2K", username: "@fit_cineflow",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=900&fit=crop",
+      caption: "Lost in the mountains 🏔️❄️ Where is this? #travel",
+      likes: "2.4M", comments: "12K", username: "@wander_cineflow",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop",
+      caption: "Wait for the cinematic drop! 🎬✨ #viral #ai #gaming",
+      likes: "1.2M", comments: "8.4K", username: "@cineflow_ai",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+    }
+  ];
+
   return (
     <div className="text-white overflow-x-hidden font-sans selection:bg-purple-500/30 relative">
       
@@ -260,58 +287,50 @@ export default function LandingPage() {
                   animate={{ y: ["0%", "0%", "-25%", "-25%", "-50%", "-50%", "-75%", "-75%"] }}
                   transition={{ duration: 12, times: [0, 0.2, 0.25, 0.45, 0.5, 0.7, 0.75, 1], repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <div className="w-full h-1/4 relative">
-                    <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop" alt="Gaming Creator Reel" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="w-full h-1/4 relative">
-                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&h=900&fit=crop" alt="Fitness Lifestyle Reel" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="w-full h-1/4 relative">
-                    <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=900&fit=crop" alt="Travel Nature Reel" className="w-full h-full object-cover" />
-                  </div>
-                  {/* Clone of the first image for seamless looping */}
-                  <div className="w-full h-1/4 relative">
-                    <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop" alt="Gaming Creator Reel" className="w-full h-full object-cover" />
-                  </div>
+                  {reelsData.map((reel, idx) => (
+                    <div key={idx} className="w-full h-1/4 relative">
+                      <img src={reel.src} alt={`Reel ${idx}`} className="absolute inset-0 w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                      
+                      {/* Reels UI Elements for this specific reel */}
+                      <div className="absolute bottom-4 left-4 right-16 z-30">
+                         <div className="flex items-center gap-2 mb-2">
+                           <div className="w-8 h-8 rounded-full border border-white/50 bg-cover bg-center" style={{ backgroundImage: `url('${reel.avatar}')` }}></div>
+                           <span className="text-sm font-bold text-white drop-shadow-md">{reel.username}</span>
+                         </div>
+                         <p className="text-xs text-white/90 drop-shadow-md mb-2">{reel.caption}</p>
+                         <div className="flex items-center gap-1 text-[10px] text-white/80 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full w-max">
+                           <Sparkles size={10} /> AI Enhanced
+                         </div>
+                      </div>
+
+                      {/* Right Action Bar for this specific reel */}
+                      <div className="absolute bottom-6 right-2 z-30 flex flex-col items-center gap-4">
+                         <div className="flex flex-col items-center gap-1">
+                           <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 transition-colors">
+                             <Heart size={20} className="text-white fill-white" />
+                           </div>
+                           <span className="text-[10px] font-bold text-white drop-shadow-md">{reel.likes}</span>
+                         </div>
+                         <div className="flex flex-col items-center gap-1">
+                           <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                             <MessageCircle size={20} className="text-white" />
+                           </div>
+                           <span className="text-[10px] font-bold text-white drop-shadow-md">{reel.comments}</span>
+                         </div>
+                         <div className="flex flex-col items-center gap-1">
+                           <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                             <Share2 size={20} className="text-white fill-white" />
+                           </div>
+                           <span className="text-[10px] font-bold text-white drop-shadow-md">Share</span>
+                         </div>
+                         <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                           <MoreHorizontal size={16} className="text-white" />
+                         </div>
+                      </div>
+                    </div>
+                  ))}
                 </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
-
-                {/* Reels UI Elements */}
-                <div className="absolute bottom-4 left-4 right-16 z-30">
-                   <div className="flex items-center gap-2 mb-2">
-                     <div className="w-8 h-8 rounded-full border border-white/50 bg-[url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop')] bg-cover"></div>
-                     <span className="text-sm font-bold text-white drop-shadow-md">@cineflow_ai</span>
-                   </div>
-                   <p className="text-xs text-white/90 drop-shadow-md mb-2">Wait for the cinematic drop! 🎬✨ #viral #ai #editing</p>
-                   <div className="flex items-center gap-1 text-[10px] text-white/80 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full w-max">
-                     <Sparkles size={10} /> AI Enhanced
-                   </div>
-                </div>
-
-                {/* Right Action Bar */}
-                <div className="absolute bottom-6 right-2 z-30 flex flex-col items-center gap-4">
-                   <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 transition-colors">
-                       <Heart size={20} className="text-white fill-white" />
-                     </div>
-                     <span className="text-[10px] font-bold text-white drop-shadow-md">1.2M</span>
-                   </div>
-                   <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                       <MessageCircle size={20} className="text-white" />
-                     </div>
-                     <span className="text-[10px] font-bold text-white drop-shadow-md">8.4K</span>
-                   </div>
-                   <div className="flex flex-col items-center gap-1">
-                     <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                       <Share2 size={20} className="text-white fill-white" />
-                     </div>
-                     <span className="text-[10px] font-bold text-white drop-shadow-md">Share</span>
-                   </div>
-                   <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                     <MoreHorizontal size={16} className="text-white" />
-                   </div>
-                </div>
 
                 {/* Screen Glare Layer */}
                 <div className="absolute top-0 right-0 w-[150%] h-[150%] bg-gradient-to-bl from-white/10 to-transparent pointer-events-none transform -translate-y-1/4 translate-x-1/4 rotate-12 z-40"></div>
