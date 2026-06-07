@@ -194,39 +194,51 @@ class AIController {
 
             // call gemini api to analyze the visual content
             let aiData = {};
-            try {
-                // @todo: move genAI initialization outside the function for better performance
-                const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY.trim());
-                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-                
-                let prompt = `You are an expert social media manager. Analyze this attached media (${resourceType}) visually and return a JSON object ONLY. 
-                The JSON must contain:
-                - "captions": an array of 5 highly engaging, descriptive captions based EXACTLY on what you see in the media.
-                - "hashtags": an array of 7 trending hashtags highly relevant to the visual content.`;
-                
-                if (isProPlus) {
-                    prompt += `
-                - "viralHooks": an array of 3 short, curiosity-inducing text hooks to place on the video screen.
-                - "songSuggestions": an array of 3 trending song names (must include a mix of English, Hindi, and Bengali songs) that fit the mood of this media. (Format: Artist - Song).`;
+            const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY.trim());
+            const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+            
+            let prompt = `You are an expert social media manager. Analyze this attached media (${resourceType}) visually and return a JSON object ONLY. 
+            The JSON must contain:
+            - "captions": an array of 5 highly engaging, descriptive captions based EXACTLY on what you see in the media.
+            - "hashtags": an array of 7 trending hashtags highly relevant to the visual content.`;
+            
+            if (isProPlus) {
+                prompt += `
+            - "viralHooks": an array of 3 short, curiosity-inducing text hooks to place on the video screen.
+            - "songSuggestions": an array of 3 trending song names (must include a mix of English, Hindi, and Bengali songs) that fit the mood of this media. (Format: Artist - Song).`;
+            }
+            
+            prompt += `\nOutput strictly valid JSON and nothing else. No markdown blocks.`;
+            
+            const mediaPart = {
+                inlineData: {
+                    data: fs.readFileSync(req.file.path).toString("base64"),
+                    mimeType: req.file.mimetype
                 }
-                
-                prompt += `\nOutput strictly valid JSON and nothing else. No markdown blocks.`;
-                
-                const mediaPart = {
-                    inlineData: {
-                        data: fs.readFileSync(req.file.path).toString("base64"),
-                        mimeType: req.file.mimetype
-                    }
-                };
+            };
 
-                const aiResult = await model.generateContent([prompt, mediaPart]);
-                const text = aiResult.response.text();
-                // strip out any markdown json formatting if gemini adds it
-                const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
-                aiData = JSON.parse(cleanedText);
-            } catch (err) {
-                console.error("error calling gemini api:", err.message);
-                return res.status(500).json({ message: `AI Analysis Failed: ${err.message}` });
+            let success = false;
+            let lastErrorMsg = "";
+
+            for (const modelName of modelsToTry) {
+                try {
+                    const model = genAI.getGenerativeModel({ model: modelName });
+                    const aiResult = await model.generateContent([prompt, mediaPart]);
+                    const text = aiResult.response.text();
+                    
+                    // strip out any markdown json formatting if gemini adds it
+                    const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+                    aiData = JSON.parse(cleanedText);
+                    success = true;
+                    break; // Success! Exit loop
+                } catch (err) {
+                    lastErrorMsg = err.message;
+                    // Error occurred, it will loop to the next fallback model
+                }
+            }
+
+            if (!success) {
+                return res.status(503).json({ message: `AI Analysis Failed after trying fallback models. Last Error: ${lastErrorMsg}` });
             }
 
             // update user credits used
