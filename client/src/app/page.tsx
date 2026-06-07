@@ -446,12 +446,16 @@ export default function LandingPage() {
 
           {/* Map Area */}
           <div className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center mb-10 z-0">
+             {/* Subtle Grid */}
+             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+
              {/* Map Image centered */}
              <div 
-               className="absolute inset-0 bg-no-repeat bg-center opacity-40 mix-blend-screen" 
+               className="absolute inset-0 bg-no-repeat bg-center opacity-30 mix-blend-screen" 
                style={{ 
-                 backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')`,
-                 backgroundSize: 'cover',
+                 backgroundImage: `url('/world-map.svg')`,
+                 backgroundSize: 'contain',
+                 filter: 'invert(1)'
                }}
              />
              
