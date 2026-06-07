@@ -121,8 +121,8 @@ export default function LandingPage() {
   return (
     <div className="text-white overflow-x-hidden font-sans selection:bg-purple-500/30 relative">
       
-      {/* Navbar */}
-      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-6 bg-transparent border-b border-white/5">
+      {/* Navbar with Premium Glass Effect */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-4 bg-[#0a0510]/40 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
             <Sparkles size={16} className="text-white" />
