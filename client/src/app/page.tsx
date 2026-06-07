@@ -28,6 +28,16 @@ export default function LandingPage() {
   };
 
   const checkAuth = async () => {
+    // Fast path: if no token exists locally, instantly show Login/Signup
+    const token = typeof window !== 'undefined' ? (localStorage.getItem('cineflow_token') || sessionStorage.getItem('cineflow_token')) : null;
+    
+    if (!token) {
+      setIsAuthenticated(false);
+      // Proactively wake up the server in the background so it's ready when they click Login
+      api.get('/').catch(() => {});
+      return;
+    }
+
     try {
       const res = await api.get('/auth/me?t=' + new Date().getTime());
       if (res.data?.user) {
