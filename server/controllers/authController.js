@@ -34,13 +34,6 @@ class AuthController {
                 avatar: avatarUrl
             });
 
-            // Log OTP for easy local testing
-            if (process.env.NODE_ENV === 'development') {
-                console.log(`\n========================================`);
-                console.log(`🔑 DEV OTP for ${email}: ${verificationToken}`);
-                console.log(`========================================\n`);
-            }
-
             await emailService.sendVerificationEmail(email, verificationToken);
 
             res.status(201).json({
