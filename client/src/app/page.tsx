@@ -132,7 +132,7 @@ export default function LandingPage() {
       </Link>
 
       {/* Navbar */}
-      <nav className="absolute top-10 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-4 bg-black/40 backdrop-blur-sm border-b border-white/5">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
             <Sparkles size={16} className="text-white" />
@@ -162,7 +162,7 @@ export default function LandingPage() {
         ref={heroRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between perspective-1000"
+        className="relative pt-28 pb-16 lg:pt-48 lg:pb-32 px-4 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between perspective-1000"
       >
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
@@ -181,9 +181,9 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black tracking-tight leading-[1.1] mb-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-6"
           >
-            Go Viral with <br />
+            Go Viral with <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">AI-Powered</span> Reels
           </motion.h1>
 
@@ -191,7 +191,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed"
+            className="text-base md:text-lg text-gray-400 mb-8 md:mb-10 max-w-lg leading-relaxed"
           >
             Turn your long-form content into short-form gold. Our AI identifies high-engagement moments and generates viral-ready reels in seconds.
           </motion.p>
@@ -200,14 +200,14 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto"
           >
-            <Link href="/studio" className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+            <Link href="/studio" className="w-full md:w-auto text-center px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm md:text-base hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)]">
               Open AI Studio
             </Link>
             <button 
               onClick={() => document.getElementById('demo-video')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 rounded-full border border-white/20 text-white font-bold text-sm hover:bg-white/5 transition-colors"
+              className="w-full md:w-auto px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-bold text-sm md:text-base hover:bg-white/10 transition-colors"
             >
               Watch Demo
             </button>

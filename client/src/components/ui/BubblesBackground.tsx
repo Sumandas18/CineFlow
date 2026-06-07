@@ -4,29 +4,37 @@ import { motion } from "framer-motion";
 
 export default function BubblesBackground() {
   const [mounted, setMounted] = useState(false);
-  
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.innerWidth < 768);
+    
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (!mounted) return null;
 
   // Pre-defined random-looking values to avoid hydration mismatch
   const colors = [
-    "from-blue-500/40 to-purple-500/40 shadow-blue-500/20",
-    "from-pink-500/40 to-orange-500/40 shadow-pink-500/20",
-    "from-cyan-500/40 to-blue-500/40 shadow-cyan-500/20",
-    "from-purple-500/40 to-pink-500/40 shadow-purple-500/20",
-    "from-yellow-500/40 to-red-500/40 shadow-yellow-500/20"
+    "from-blue-500/30 to-purple-500/30",
+    "from-pink-500/30 to-orange-500/30",
+    "from-cyan-500/30 to-blue-500/30",
+    "from-purple-500/30 to-pink-500/30",
+    "from-yellow-500/30 to-red-500/30"
   ];
 
-  const bubbleConfigs = Array.from({ length: 80 }).map((_, i) => ({
+  const bubbleCount = isMobile ? 15 : 35; // Drastically reduce on mobile for performance
+
+  const bubbleConfigs = Array.from({ length: bubbleCount }).map((_, i) => ({
     id: i,
     size: Math.floor(Math.random() * 25) + 8, // Small size (8px to 33px)
     left: Math.floor(Math.random() * 100) + "%",
-    duration: Math.floor(Math.random() * 8) + 5, // Much faster floating (5s to 13s)
+    duration: Math.floor(Math.random() * 12) + 8, // Slower floating is better for FPS (8s to 20s)
     delay: Math.random() * 5,
-    xMovement: Math.floor(Math.random() * 150) - 75,
+    xMovement: Math.floor(Math.random() * 100) - 50,
     colorClass: colors[Math.floor(Math.random() * colors.length)]
   }));
 
@@ -35,8 +43,9 @@ export default function BubblesBackground() {
       {bubbleConfigs.map((config) => (
         <motion.div
           key={config.id}
-          className={`absolute rounded-full bg-gradient-to-tr ${config.colorClass} backdrop-blur-[1px] shadow-lg`}
+          className={`absolute rounded-full bg-gradient-to-tr ${config.colorClass} shadow-sm`}
           style={{
+            willChange: "transform",
             width: config.size,
             height: config.size,
             left: config.left,
