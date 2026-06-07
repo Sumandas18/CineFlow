@@ -130,7 +130,7 @@ export default function AIStudioPage() {
         
         <label className={`flex-1 min-h-[250px] lg:min-h-[300px] border-2 border-dashed ${imagePreview ? 'border-purple-500/50 bg-purple-500/5 p-2' : 'border-white/10 p-8'} rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 relative group hover:border-purple-500/50 hover:bg-purple-500/5 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)] w-full`}>
            {imagePreview ? (
-              <div className="w-full h-full relative rounded-xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center shadow-inner">
+              <div className="w-full flex-1 min-h-0 relative rounded-xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center shadow-inner group-hover:bg-[#111]">
                  {imageFile?.type.startsWith('video/') ? (
                     <video src={imagePreview} className="absolute inset-0 w-full h-full object-contain" autoPlay loop muted playsInline />
                  ) : (
