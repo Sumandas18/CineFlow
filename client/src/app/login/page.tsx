@@ -11,6 +11,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [serverWaking, setServerWaking] = useState(false);
+
+  React.useEffect(() => {
+    // Wake up Render free tier backend proactively
+    api.get('/').catch(() => {});
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,8 +40,19 @@ export default function LoginPage() {
       console.error(error);
     } finally {
       setLoading(false);
+      setServerWaking(false);
     }
   };
+
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (loading) {
+      timeout = setTimeout(() => {
+        setServerWaking(true);
+      }, 5000); // Show warning after 5s of loading
+    }
+    return () => clearTimeout(timeout);
+  }, [loading]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
@@ -109,9 +126,10 @@ export default function LoginPage() {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 flex flex-col items-center justify-center h-16"
           >
-            {loading ? "Logging in..." : "Login"}
+            <span>{loading ? "Authenticating..." : "Login"}</span>
+            {serverWaking && <span className="text-[10px] font-normal opacity-80 mt-1 animate-pulse">Waking up secure server... (up to 50s)</span>}
           </button>
         </form>
 

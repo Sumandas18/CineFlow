@@ -12,6 +12,22 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [serverWaking, setServerWaking] = useState(false);
+
+  React.useEffect(() => {
+    // Wake up Render free tier backend proactively
+    api.get('/').catch(() => {});
+  }, []);
+
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (loading) {
+      timeout = setTimeout(() => {
+        setServerWaking(true);
+      }, 5000); // Show warning after 5s of loading
+    }
+    return () => clearTimeout(timeout);
+  }, [loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,10 +46,10 @@ export default function SignupPage() {
       });
       window.location.href = "/verify-email";
     } catch (error: any) {
-      alert(error.response?.data?.message || "Failed to create account");
-      console.error(error);
+      alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
+      setServerWaking(false);
     }
   };
 
@@ -148,10 +164,10 @@ export default function SignupPage() {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold hover:opacity-90 transition-opacity mt-4 flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 flex flex-col items-center justify-center h-16"
           >
-            {loading ? "Creating..." : "Create Account"}
-            <span className="text-xl">→</span>
+            <span>{loading ? "Creating Account..." : "Create Account"}</span>
+            {serverWaking && <span className="text-[10px] font-normal opacity-80 mt-1 animate-pulse">Waking up secure server... (up to 50s)</span>}
           </button>
         </form>
 
