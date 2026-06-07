@@ -120,28 +120,28 @@ export default function LandingPage() {
 
   const reelsData = [
     {
-      src: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop",
-      caption: "Wait for the cinematic drop! 🎬✨ #viral #ai #gaming",
-      likes: "1.2M", comments: "8.4K", username: "@cineflow_ai",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&h=900&fit=crop",
-      caption: "Morning routine for the perfect start! 🧘‍♀️🌿 #fitness",
-      likes: "850K", comments: "3.2K", username: "@fit_cineflow",
-      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=900&fit=crop",
-      caption: "Lost in the mountains 🏔️❄️ Where is this? #travel",
-      likes: "2.4M", comments: "12K", username: "@wander_cineflow",
+      src: "https://images.unsplash.com/photo-1506744626753-1fa28f67ea1c?w=500&h=900&fit=crop",
+      caption: "The majesty of the valley 🏔️✨ #nature #mountains",
+      likes: "3.4M", comments: "15.2K", username: "@nature_cineflow",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
     },
     {
-      src: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop",
-      caption: "Wait for the cinematic drop! 🎬✨ #viral #ai #gaming",
-      likes: "1.2M", comments: "8.4K", username: "@cineflow_ai",
+      src: "https://images.unsplash.com/photo-1549366021-9f761d450615?w=500&h=900&fit=crop",
+      caption: "King of the jungle in 4K 🐅🔥 #wildlife #tiger",
+      likes: "5.1M", comments: "42.8K", username: "@wild_cineflow",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&h=900&fit=crop",
+      caption: "Breathtaking views from the peak! ❄️💙 #explore",
+      likes: "1.8M", comments: "6.7K", username: "@adventure_ai",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1506744626753-1fa28f67ea1c?w=500&h=900&fit=crop",
+      caption: "The majesty of the valley 🏔️✨ #nature #mountains",
+      likes: "3.4M", comments: "15.2K", username: "@nature_cineflow",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
     }
   ];
 
