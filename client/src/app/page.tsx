@@ -240,7 +240,11 @@ export default function LandingPage() {
                 </div>
 
                 {/* Real-looking Reels UI Background */}
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center"></div>
+                <video 
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay loop muted playsInline
+                  src="https://assets.mixkit.co/videos/preview/mixkit-dj-playing-music-in-a-nightclub-4359-large.mp4"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 
                 {/* Reels UI Elements */}
