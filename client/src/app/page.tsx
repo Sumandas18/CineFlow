@@ -121,18 +121,8 @@ export default function LandingPage() {
   return (
     <div className="text-white overflow-x-hidden font-sans selection:bg-purple-500/30 relative">
       
-      {/* Top Premium Banner */}
-      <Link href="/pricing" className="block w-full bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white text-center py-2.5 text-sm font-bold tracking-wide hover:opacity-90 transition-opacity relative z-[60] group overflow-hidden">
-        <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-12"></div>
-        <div className="relative z-10 flex items-center justify-center gap-2">
-          <Sparkles size={16} className="animate-pulse text-yellow-300" />
-          <span>Buy your plan to get <span className="text-yellow-300">Premium Access</span></span>
-          <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-        </div>
-      </Link>
-
       {/* Navbar */}
-      <nav className="sticky top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-4 bg-black/40 backdrop-blur-sm border-b border-white/5">
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-6 bg-transparent border-b border-white/5">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
             <Sparkles size={16} className="text-white" />
@@ -172,9 +162,19 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-6"
+            className="flex flex-wrap items-center gap-3 mb-6"
           >
-            AI-POWERED VIRAL GROWTH
+            <div className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest">
+              AI-POWERED VIRAL GROWTH
+            </div>
+            
+            <Link href="/pricing" className="relative inline-flex items-center justify-center group">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-ping opacity-40"></div>
+              <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 border border-white/20 text-white px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-[0_0_15px_rgba(236,72,153,0.4)]">
+                <Sparkles size={12} className="text-yellow-300" />
+                Premium Access <span className="group-hover:translate-x-1 transition-transform inline-block ml-0.5">→</span>
+              </div>
+            </Link>
           </motion.div>
           
           <motion.h1 
