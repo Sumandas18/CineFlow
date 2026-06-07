@@ -167,15 +167,32 @@ export default function AIStudioPage() {
           <button 
             onClick={handleGenerate}
             disabled={!imageFile || isGenerating || isLimitReached}
-            className="w-full max-w-xl py-4 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-sm md:text-lg hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)] disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-2 text-center leading-tight"
+            className={`w-full max-w-md py-4 px-6 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 relative overflow-hidden
+              ${isGenerating 
+                ? 'bg-black/50 border border-purple-500/50 text-purple-300 cursor-wait shadow-[0_0_30px_rgba(168,85,247,0.2)]' 
+                : (!imageFile || isLimitReached)
+                  ? 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/5'
+                  : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(168,85,247,0.5)] border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.3)]'
+              }
+            `}
           >
-            <Sparkles size={20} className="shrink-0" />
-            {isGenerating 
-              ? "AI is detecting your media... (Wait 6-7s)" 
-              : isLimitReached 
-                ? "Limit Exhausted. Wait for Next Day ⏳"
-                : "⚡ Process Media with AI"
-            }
+            {isGenerating && (
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" style={{ animation: 'shimmer 2s infinite' }}></div>
+            )}
+            
+            {isGenerating ? (
+              <>
+                <Loader2 size={20} className="animate-spin text-purple-400" />
+                <span className="animate-pulse">Analyzing Media...</span>
+              </>
+            ) : isLimitReached ? (
+              <span>Limit Exhausted (Wait 24h)</span>
+            ) : (
+              <>
+                <Sparkles size={20} className={!imageFile ? 'opacity-50' : ''} />
+                <span>Analyze with AI</span>
+              </>
+            )}
           </button>
         </div>
       </div>
