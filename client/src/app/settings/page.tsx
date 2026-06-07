@@ -48,9 +48,7 @@ export default function SettingsPage() {
       if (avatar) {
         const formData = new FormData();
         formData.append("avatar", avatar);
-        await api.put('/users/avatar/update', formData, {
-          headers: { "Content-Type": "multipart/form-data" }
-        });
+        await api.put('/users/avatar/update', formData);
       }
       
       setMessage("Profile updated successfully! Refreshing...");

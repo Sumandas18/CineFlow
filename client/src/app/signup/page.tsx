@@ -41,9 +41,7 @@ export default function SignupPage() {
         formData.append("avatar", avatar);
       }
 
-      await api.post(`/auth/register`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
+      await api.post(`/auth/register`, formData);
       window.location.href = "/verify-email";
     } catch (error: any) {
       alert(error.response?.data?.message || "Registration failed");

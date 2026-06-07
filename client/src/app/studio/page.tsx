@@ -56,9 +56,7 @@ export default function AIStudioPage() {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      const res = await api.post('/ai/analyze-image', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      const res = await api.post('/ai/analyze-image', formData);
 
       if (res.data.success) {
         setResult({

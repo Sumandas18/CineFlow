@@ -132,7 +132,7 @@ export default function LandingPage() {
       </Link>
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-4 bg-black/40 backdrop-blur-sm border-b border-white/5">
+      <nav className="sticky top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-8 py-4 bg-black/40 backdrop-blur-sm border-b border-white/5">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
             <Sparkles size={16} className="text-white" />
@@ -243,7 +243,7 @@ export default function LandingPage() {
                 <video 
                   className="absolute inset-0 w-full h-full object-cover"
                   autoPlay loop muted playsInline
-                  src="https://assets.mixkit.co/videos/preview/mixkit-dj-playing-music-in-a-nightclub-4359-large.mp4"
+                  src="/landingpage/landing.mp4"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 
