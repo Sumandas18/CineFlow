@@ -158,23 +158,29 @@ export default function LandingPage() {
       >
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
+        {/* Sleek Premium Glass Orb (Top Left) */}
+        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-8 z-50 group cursor-pointer hidden md:flex flex-col items-center justify-center w-[72px] h-[72px] hover:scale-105 transition-transform duration-300">
+          {/* Animated gradient ring */}
+          <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0_280deg,rgba(236,72,153,0.8)_360deg)] animate-[spin_3s_linear_infinite] opacity-80 group-hover:opacity-100"></div>
+          
+          {/* Inner Glass Body */}
+          <div className="absolute inset-[2px] rounded-full bg-black/60 backdrop-blur-md flex flex-col items-center justify-center border border-white/5 shadow-[0_0_20px_rgba(236,72,153,0.15)] group-hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] transition-all duration-300">
+            <Sparkles size={14} className="text-pink-400 mb-0.5 group-hover:text-pink-300 transition-colors" />
+            <span className="text-[8px] font-black text-center leading-[1.2] uppercase tracking-widest text-white/80 group-hover:text-white transition-colors">
+              PRO
+            </span>
+          </div>
+        </Link>
+
         {/* Left Content */}
         <div className="w-full lg:w-1/2 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3 mb-6"
+            className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-6"
           >
-            <div className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest">
-              AI-POWERED VIRAL GROWTH
-            </div>
-            
-            <Link href="/pricing" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-[10px] font-bold text-white uppercase tracking-wider group">
-              <Sparkles size={12} className="text-yellow-400" />
-              <span>Premium Access</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </Link>
+            AI-POWERED VIRAL GROWTH
           </motion.div>
           
           <motion.h1 
