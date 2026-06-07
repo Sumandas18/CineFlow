@@ -254,12 +254,26 @@ export default function LandingPage() {
                    </div>
                 </div>
 
-                {/* Real-looking Reels UI Background */}
-                <video 
-                  className="absolute inset-0 w-full h-full object-cover"
-                  autoPlay loop muted playsInline
-                  src="/landingpage/landing.mp4"
-                />
+                {/* Real-looking Reels Swiping UI Background */}
+                <motion.div 
+                  className="absolute inset-0 w-full h-[400%] flex flex-col"
+                  animate={{ y: ["0%", "0%", "-25%", "-25%", "-50%", "-50%", "-75%", "-75%"] }}
+                  transition={{ duration: 12, times: [0, 0.2, 0.25, 0.45, 0.5, 0.7, 0.75, 1], repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <div className="w-full h-1/4 relative">
+                    <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop" alt="Gaming Creator Reel" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-full h-1/4 relative">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&h=900&fit=crop" alt="Fitness Lifestyle Reel" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-full h-1/4 relative">
+                    <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=900&fit=crop" alt="Travel Nature Reel" className="w-full h-full object-cover" />
+                  </div>
+                  {/* Clone of the first image for seamless looping */}
+                  <div className="w-full h-1/4 relative">
+                    <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=500&h=900&fit=crop" alt="Gaming Creator Reel" className="w-full h-full object-cover" />
+                  </div>
+                </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 
                 {/* Reels UI Elements */}
