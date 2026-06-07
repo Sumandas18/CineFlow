@@ -23,6 +23,12 @@ api.interceptors.response.use(
     // Check if error is 401 Unauthorized
     if (error.response?.status === 401 && typeof window !== "undefined") {
       const currentPath = window.location.pathname;
+      
+      // Clear all tokens to prevent infinite redirect loops with middleware
+      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      localStorage.removeItem('cineflow_token');
+      sessionStorage.removeItem('cineflow_token');
+
       // Don't redirect to login if already on landing page, login, signup pages, or admin pages
       if (
         !currentPath.includes('/login') && 
