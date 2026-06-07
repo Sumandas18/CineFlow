@@ -427,52 +427,51 @@ export default function LandingPage() {
 
 
       {/* CTA Section */}
-      <div className="py-24 px-6 max-w-4xl mx-auto">
-        <div className="bg-[#0a0510] border border-white/10 rounded-[2.5rem] p-12 shadow-[0_20px_60px_rgba(168,85,247,0.2)] relative overflow-hidden min-h-[450px] flex flex-col justify-between text-left">
+      <div className="py-24 px-6 max-w-5xl mx-auto flex flex-col items-center">
+        
+        {/* Main Heading OUTSIDE the box */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-black drop-shadow-lg leading-tight">
+            Ready to go <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Viral?</span>
+          </h2>
+        </div>
+
+        {/* The Card */}
+        <div className="w-full bg-[#0a0510] border border-white/10 rounded-[2.5rem] shadow-[0_20px_60px_rgba(168,85,247,0.2)] relative overflow-hidden flex flex-col items-center p-8 md:p-12">
           
-          {/* Tactical Map Background */}
-          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-             {/* Actual World Map Image */}
+          {/* Small text at the top inside the box */}
+          <p className="text-gray-400 text-sm md:text-base text-center max-w-xl mx-auto mb-8 z-10 relative">
+            Join 50,000+ creators scaling their influence with CineFlow AI. No credit card required to start.
+          </p>
+
+          {/* Map Area */}
+          <div className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center mb-10 z-0">
+             {/* Map Image centered */}
              <div 
-               className="absolute inset-0 bg-no-repeat bg-right opacity-[0.15]" 
+               className="absolute inset-0 bg-no-repeat bg-center opacity-40 mix-blend-screen" 
                style={{ 
-                 backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/c/c3/World_map_blank_black.png')`,
-                 backgroundSize: 'contain',
-                 filter: 'invert(1)'
+                 backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')`,
+                 backgroundSize: 'cover',
                }}
              />
-
-             {/* Grid */}
-             <div className="absolute inset-0 opacity-40" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
              
-             {/* Radar Sweep Effect */}
-             <div className="absolute top-1/2 left-[70%] w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
-             <div className="absolute top-1/2 left-[70%] w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
-             <div className="absolute top-1/2 left-[70%] w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full"></div>
-
-             {/* Blips (Shifted right) */}
-             <RadarBlip top="30%" left="55%" color="bg-green-500" label="TikTok 98%" delay={0} />
-             <RadarBlip top="60%" left="65%" color="bg-blue-500" label="IG Reels 94%" delay={1.5} />
-             <RadarBlip top="25%" left="80%" color="bg-purple-500" label="YT Shorts 89%" delay={0.8} />
-             <RadarBlip top="55%" left="85%" color="bg-pink-500" label="Snapchat 85%" delay={2.2} />
-             <RadarBlip top="75%" left="50%" color="bg-yellow-500" label="Twitter 78%" delay={3.1} />
+             {/* Map Pins connected to countries */}
+             <MapPin top="35%" left="22%" color="bg-pink-500" label="TikTok 98%" delay={0} />
+             <MapPin top="30%" left="50%" color="bg-purple-500" label="IG Reels 94%" delay={1.2} />
+             <MapPin top="48%" left="68%" color="bg-cyan-500" label="YT Shorts 89%" delay={2.5} />
+             <MapPin top="65%" left="32%" color="bg-yellow-500" label="Snapchat 85%" delay={0.8} />
+             <MapPin top="75%" left="85%" color="bg-green-500" label="Twitter 78%" delay={1.8} />
              
              {/* Center Glow */}
-             <div className="absolute top-1/2 left-[70%] w-[400px] h-[400px] bg-purple-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+             <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
           </div>
 
-          {/* Main Content (Top Left Aligned) */}
-          <div className="relative z-10 max-w-lg mt-4">
-            <h2 className="text-4xl md:text-5xl font-black mb-4 drop-shadow-lg leading-tight">Ready to go <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Viral?</span></h2>
-            <p className="text-gray-300 text-sm md:text-base drop-shadow-md">Join 50,000+ creators scaling their influence with CineFlow AI. No credit card required to start.</p>
-          </div>
-
-          {/* CTA Buttons (Bottom Left Aligned) */}
-          <div className="relative z-10 flex flex-wrap gap-4 mt-16 mb-4">
-            <Link href={isAuthenticated ? "/studio" : "/login"} className="px-8 py-3 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+          {/* CTA Buttons (Bottom Centered) */}
+          <div className="relative z-10 flex flex-wrap justify-center gap-4 w-full">
+            <Link href={isAuthenticated ? "/studio" : "/login"} className="px-8 py-4 rounded-full bg-white text-black font-bold text-sm md:text-base hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               Open AI Studio
             </Link>
-            <Link href={isAuthenticated ? "/pricing" : "/login"} className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors backdrop-blur-sm">
+            <Link href={isAuthenticated ? "/pricing" : "/login"} className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm md:text-base hover:bg-white/10 transition-colors backdrop-blur-sm">
               View Detailed Plans
             </Link>
           </div>
@@ -498,23 +497,25 @@ export default function LandingPage() {
   );
 }
 
-// Tactical Map Blip Component
-function RadarBlip({ top, left, color, label, delay }: { top: string, left: string, color: string, label: string, delay: number }) {
+// Tactical Map Marker Component
+function MapPin({ top, left, color, label, delay }: { top: string, left: string, color: string, label: string, delay: number }) {
   return (
     <motion.div 
-      className="absolute flex items-center gap-2 z-0"
-      style={{ top, left }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: [0, 1, 1, 0], scale: [0.8, 1, 1, 0.8] }}
-      transition={{ duration: 4, delay, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute flex flex-col items-center z-10"
+      style={{ top, left, transform: 'translate(-50%, -100%)' }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.5, delay, repeat: Infinity, repeatType: "reverse", repeatDelay: 2 }}
     >
-      <div className="relative flex h-3 w-3">
-        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${color}`}></span>
-        <span className={`relative inline-flex rounded-full h-3 w-3 ${color}`}></span>
-      </div>
-      <div className="bg-[#120b1c]/80 border border-white/10 px-2 py-1 rounded text-[10px] font-bold text-white backdrop-blur-sm whitespace-nowrap shadow-lg">
+      <div className="bg-[#120b1c]/90 border border-white/10 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold text-white backdrop-blur-sm whitespace-nowrap shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center gap-2 mb-1">
+        <div className="relative flex h-2.5 w-2.5">
+          <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${color}`}></span>
+          <span className={`relative inline-flex rounded-full h-full w-full ${color}`}></span>
+        </div>
         {label}
       </div>
+      <div className={`w-px h-6 md:h-10 bg-gradient-to-b from-white/40 to-transparent`}></div>
+      <div className={`w-1.5 h-1.5 rounded-full ${color} shadow-[0_0_10px_currentColor] mt-[-3px]`}></div>
     </motion.div>
   );
 }
