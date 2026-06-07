@@ -156,25 +156,26 @@ export default function LandingPage() {
       >
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none" />
         
+        {/* Floating Premium Orb (Top Left) */}
+        <Link href="/pricing" className="absolute top-12 lg:top-32 left-4 lg:-left-10 z-50 group cursor-pointer flex flex-col items-center justify-center w-20 h-20 lg:w-24 lg:h-24">
+          <div className="absolute inset-0 bg-pink-500 rounded-full animate-ping opacity-40"></div>
+          <div className="relative w-full h-full bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex flex-col items-center justify-center border border-white/30 shadow-[0_0_30px_rgba(236,72,153,0.6)] group-hover:scale-110 transition-transform duration-300">
+            <Sparkles size={16} className="text-yellow-300 mb-1 animate-pulse" />
+            <span className="text-[9px] lg:text-[10px] font-black text-center leading-[1.1] uppercase tracking-wider text-white drop-shadow-md">
+              Get<br/>Premium
+            </span>
+          </div>
+        </Link>
+        
         {/* Left Content */}
         <div className="w-full lg:w-1/2 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3 mb-6"
+            className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-6"
           >
-            <div className="inline-block px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-[10px] font-bold text-purple-300 uppercase tracking-widest">
-              AI-POWERED VIRAL GROWTH
-            </div>
-            
-            <Link href="/pricing" className="relative inline-flex items-center justify-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-ping opacity-40"></div>
-              <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 border border-white/20 text-white px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-[0_0_15px_rgba(236,72,153,0.4)]">
-                <Sparkles size={12} className="text-yellow-300" />
-                Premium Access <span className="group-hover:translate-x-1 transition-transform inline-block ml-0.5">→</span>
-              </div>
-            </Link>
+            AI-POWERED VIRAL GROWTH
           </motion.div>
           
           <motion.h1 
