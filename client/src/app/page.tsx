@@ -428,45 +428,51 @@ export default function LandingPage() {
 
       {/* CTA Section */}
       <div className="py-24 px-6 max-w-4xl mx-auto">
-        <div className="bg-[#0a0510] border border-white/10 rounded-[2.5rem] p-12 text-center shadow-[0_20px_60px_rgba(168,85,247,0.2)] relative overflow-hidden min-h-[450px] flex flex-col justify-center">
+        <div className="bg-[#0a0510] border border-white/10 rounded-[2.5rem] p-12 shadow-[0_20px_60px_rgba(168,85,247,0.2)] relative overflow-hidden min-h-[450px] flex flex-col justify-between text-left">
           
           {/* Tactical Map Background */}
-          <div className="absolute inset-0 z-0 overflow-hidden opacity-80 pointer-events-none">
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+             {/* Actual World Map Image */}
+             <div 
+               className="absolute inset-0 bg-no-repeat bg-right opacity-[0.15]" 
+               style={{ 
+                 backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/c/c3/World_map_blank_black.png')`,
+                 backgroundSize: 'contain',
+                 filter: 'invert(1)'
+               }}
+             />
+
              {/* Grid */}
-             <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+             <div className="absolute inset-0 opacity-40" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
              
              {/* Radar Sweep Effect */}
-             <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
-             <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
-             <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full"></div>
+             <div className="absolute top-1/2 left-[70%] w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
+             <div className="absolute top-1/2 left-[70%] w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"></div>
+             <div className="absolute top-1/2 left-[70%] w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full"></div>
 
-             {/* Top Left Text */}
-             <div className="absolute top-8 left-8 flex flex-col items-start gap-1">
-               <div className="flex items-center gap-2">
-                 <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
-                 <span className="text-[10px] font-bold text-cyan-400 tracking-widest uppercase">Tactical Scan Active</span>
-               </div>
-               <span className="text-[8px] text-gray-500 tracking-wider uppercase">Scanning target footprint 24/7</span>
-             </div>
-
-             {/* Blips */}
-             <RadarBlip top="25%" left="15%" color="bg-green-500" label="TikTok 98%" delay={0} />
-             <RadarBlip top="70%" left="20%" color="bg-blue-500" label="IG Reels 94%" delay={1.5} />
-             <RadarBlip top="30%" left="80%" color="bg-purple-500" label="YT Shorts 89%" delay={0.8} />
-             <RadarBlip top="65%" left="75%" color="bg-pink-500" label="Snapchat 85%" delay={2.2} />
-             <RadarBlip top="15%" left="60%" color="bg-yellow-500" label="Twitter 78%" delay={3.1} />
+             {/* Blips (Shifted right) */}
+             <RadarBlip top="30%" left="55%" color="bg-green-500" label="TikTok 98%" delay={0} />
+             <RadarBlip top="60%" left="65%" color="bg-blue-500" label="IG Reels 94%" delay={1.5} />
+             <RadarBlip top="25%" left="80%" color="bg-purple-500" label="YT Shorts 89%" delay={0.8} />
+             <RadarBlip top="55%" left="85%" color="bg-pink-500" label="Snapchat 85%" delay={2.2} />
+             <RadarBlip top="75%" left="50%" color="bg-yellow-500" label="Twitter 78%" delay={3.1} />
              
              {/* Center Glow */}
-             <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-purple-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+             <div className="absolute top-1/2 left-[70%] w-[400px] h-[400px] bg-purple-600/20 blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-black mb-6 relative z-10 drop-shadow-lg">Ready to go Viral?</h2>
-          <p className="text-gray-300 text-base mb-10 relative z-10 max-w-xl mx-auto drop-shadow-md">Join 50,000+ creators scaling their influence with CineFlow AI. No credit card required to start.</p>
-          <div className="flex flex-wrap justify-center gap-4 relative z-10">
-            <Link href={isAuthenticated ? "/studio" : "/login"} className="px-10 py-4 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+          {/* Main Content (Top Left Aligned) */}
+          <div className="relative z-10 max-w-lg mt-4">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 drop-shadow-lg leading-tight">Ready to go <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Viral?</span></h2>
+            <p className="text-gray-300 text-sm md:text-base drop-shadow-md">Join 50,000+ creators scaling their influence with CineFlow AI. No credit card required to start.</p>
+          </div>
+
+          {/* CTA Buttons (Bottom Left Aligned) */}
+          <div className="relative z-10 flex flex-wrap gap-4 mt-16 mb-4">
+            <Link href={isAuthenticated ? "/studio" : "/login"} className="px-8 py-3 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               Open AI Studio
             </Link>
-            <Link href={isAuthenticated ? "/pricing" : "/login"} className="px-10 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors backdrop-blur-sm">
+            <Link href={isAuthenticated ? "/pricing" : "/login"} className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors backdrop-blur-sm">
               View Detailed Plans
             </Link>
           </div>
