@@ -120,7 +120,7 @@ export default function LandingPage() {
 
   const reelsData = [
     {
-      src: "https://images.unsplash.com/photo-1506744626753-1fa28f67ea1c?w=500&h=900&fit=crop",
+      src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&h=900&fit=crop",
       caption: "The majesty of the valley 🏔️✨ #nature #mountains",
       likes: "3.4M", comments: "15.2K", username: "@nature_cineflow",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
@@ -138,7 +138,7 @@ export default function LandingPage() {
       avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop"
     },
     {
-      src: "https://images.unsplash.com/photo-1506744626753-1fa28f67ea1c?w=500&h=900&fit=crop",
+      src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&h=900&fit=crop",
       caption: "The majesty of the valley 🏔️✨ #nature #mountains",
       likes: "3.4M", comments: "15.2K", username: "@nature_cineflow",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
